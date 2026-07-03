@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://u0jb27d5jyrv"]
+
+[ext_resource type="Script" uid="uid://b1pucg5o84d1u" path="res://scripts/Car.cs" id="1_c35m8"]
+[ext_resource type="Texture2D" uid="uid://du72qgl4yuesk" path="res://assets/green_car.png" id="2_jtldb"]
+[ext_resource type="Texture2D" uid="uid://bdckiryi8ctgb" path="res://assets/grey_car.png" id="3_3mrxu"]
+[ext_resource type="Texture2D" uid="uid://ct1vnpgsguqni" path="res://assets/orange_car.png" id="4_cp117"]
+
+[node name="Car" type="Node2D" unique_id=1998896927]
+script = ExtResource("1_c35m8")
+CarTextures = Array[Texture2D]([ExtResource("2_jtldb"), ExtResource("3_3mrxu"), ExtResource("4_cp117")])
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1951987109]
+y_sort_enabled = true
+position = Vector2(2, -73)
+scale = Vector2(6, 6)
+texture = ExtResource("2_jtldb")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1549816360]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="OnVisibleOnScreenNotifier2DScreenExited"]
