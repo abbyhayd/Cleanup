@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dsvfv2wofj252"]
+
+[ext_resource type="Texture2D" uid="uid://b5wp3vv8e3jta" path="res://assets/background.png" id="1_ig7tw"]
+
+[node name="Node2D" type="Node2D" unique_id=1394223643]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=860451028]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=341090728]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ig7tw")
