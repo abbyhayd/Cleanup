@@ -20,7 +20,6 @@ public partial class Main : Node2D
 
 	private void OnCarSpawnTimerTimeout()
 	{
-		GD.Print("Car spawning");
 		Car car = CarScene.Instantiate<Car>();
 		Node2D spawnPoints = GetNode<Node2D>("CarSpawnMarkers");
 		Marker2D spawnPoint = GetRandomChild(spawnPoints) as Marker2D ?? throw new Exception("No spawn points found.");

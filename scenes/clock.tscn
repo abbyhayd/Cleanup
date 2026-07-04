@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://bm8psgd81u2n3"]
+
+[ext_resource type="Script" uid="uid://dbl1tg6nr3d4h" path="res://scripts/Clock.cs" id="1_7dv1d"]
+[ext_resource type="Texture2D" uid="uid://b5h25d8x6ca2e" path="res://assets/hud/clock.png" id="1_vlc7k"]
+[ext_resource type="Texture2D" uid="uid://ckflbdwvfkhy1" path="res://assets/hud/clock_arrow.png" id="2_y58p0"]
+[ext_resource type="FontFile" uid="uid://co040mqve6pfq" path="res://assets/hud/alarm clock.ttf" id="3_eptq3"]
+[ext_resource type="LabelSettings" uid="uid://i2utuxoqoebr" path="res://assets/hud/clock_label_settings.tres" id="4_7dv1d"]
+[ext_resource type="Resource" uid="uid://dgf4jgsg5suat" path="res://scripts/global/DateTime.tres" id="6_ma5gl"]
+
+[node name="Clock" type="Control" unique_id=1522393874]
+layout_mode = 3
+anchors_preset = 0
+rotation = 0.00036309267
+script = ExtResource("1_7dv1d")
+dateTime = ExtResource("6_ma5gl")
+ticksPerSecond = 90
+
+[node name="Clock" type="TextureRect" parent="." unique_id=501129606]
+layout_mode = 0
+offset_right = 268.15585
+offset_bottom = 89.0
+texture = ExtResource("1_vlc7k")
+metadata/_edit_lock_ = true
+
+[node name="ClockArrow" type="TextureRect" parent="." unique_id=249716996]
+layout_mode = 0
+offset_left = 219.0
+offset_top = 34.0
+offset_right = 259.0
+offset_bottom = 54.0
+rotation = -1.2042772
+pivot_offset = Vector2(0, 10.02)
+texture = ExtResource("2_y58p0")
+
+[node name="ClockControl" type="Control" parent="." unique_id=1317025125]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ClockLabel" type="Label" parent="ClockControl" unique_id=1885373090]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 3.0
+offset_right = 189.0
+offset_bottom = 85.0
+theme_override_fonts/font = ExtResource("3_eptq3")
+label_settings = ExtResource("4_7dv1d")
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 171

@@ -26,9 +26,9 @@ public partial class Car : Node2D
 	{
 		Position += Direction * Speed * (float)delta;
 
-		if(onScreen && !droppedTrash && GD.Randi() % 100 < 1)
+		if(onScreen && !droppedTrash && GD.Randf() < Global.TRASH_SPAWN_CHANCE)
 		{
-			GD.Print("Dropping trash from car");
+			// GD.Print("Dropping trash from car");
 			droppedTrash = true;
 			Trash trash = TrashScene.Instantiate<Trash>();
 

@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="DateTime" format=3 uid="uid://dgf4jgsg5suat"]
+
+[ext_resource type="Script" uid="uid://ltftr3i4bxhc" path="res://scripts/global/DateTime.cs" id="1_bxy86"]
+
+[resource]
+script = ExtResource("1_bxy86")

@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://b1pucg5o84d1u" path="res://scripts/Car.cs" id="1_c35m8"]
 [ext_resource type="PackedScene" uid="uid://c8ylb5531w058" path="res://scenes/trash.tscn" id="2_3mrxu"]
-[ext_resource type="Texture2D" uid="uid://du72qgl4yuesk" path="res://assets/green_car.png" id="2_jtldb"]
-[ext_resource type="Texture2D" uid="uid://bdckiryi8ctgb" path="res://assets/grey_car.png" id="3_3mrxu"]
-[ext_resource type="Texture2D" uid="uid://ct1vnpgsguqni" path="res://assets/orange_car.png" id="4_cp117"]
+[ext_resource type="Texture2D" uid="uid://du72qgl4yuesk" path="res://assets/car/green_car.png" id="2_jtldb"]
+[ext_resource type="Texture2D" uid="uid://bdckiryi8ctgb" path="res://assets/car/grey_car.png" id="3_3mrxu"]
+[ext_resource type="Texture2D" uid="uid://ct1vnpgsguqni" path="res://assets/car/orange_car.png" id="4_cp117"]
 
 [node name="Car" type="Node2D" unique_id=1998896927]
 script = ExtResource("1_c35m8")
