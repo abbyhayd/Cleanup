@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cn04elntx1x7h" path="res://scripts/Person.cs" id="1_8qhow"]
 [ext_resource type="Texture2D" uid="uid://mgwagg1ji1f2" path="res://assets/person/human1.png" id="2_526uv"]
+[ext_resource type="PackedScene" uid="uid://c8ylb5531w058" path="res://scenes/trash.tscn" id="2_yhvuw"]
 [ext_resource type="Texture2D" uid="uid://wsgkgsp8ewus" path="res://assets/person/human2.png" id="3_yhvuw"]
 [ext_resource type="Texture2D" uid="uid://frxhmge8rn60" path="res://assets/person/human3.png" id="4_06ebq"]
 [ext_resource type="Texture2D" uid="uid://vh5kdawugfxe" path="res://assets/person/human4.png" id="5_gqr4j"]
@@ -45,6 +46,7 @@ animations = [{
 [node name="Person" type="Node2D" unique_id=32785012]
 y_sort_enabled = true
 script = ExtResource("1_8qhow")
+TrashScene = ExtResource("2_yhvuw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=364640440]
 position = Vector2(0, -95)
@@ -56,4 +58,7 @@ frame_progress = 0.64866245
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=598568248]
 
+[node name="TrashSpawnMarker" type="Marker2D" parent="." unique_id=1176138398]
+
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="OnVisibleOnScreenNotifier2DScreenEntered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="OnVisibleOnScreenNotifier2DScreenExited"]

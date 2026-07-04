@@ -3,10 +3,13 @@ using System;
 
 public partial class Car : Node2D
 {
-	[Export] public float Speed { get; set; } = 200.0f;
-	public Vector2 Direction { get; set; } = Vector2.Left;
+	[Export] public float Speed { get; set; } = 250.0f;
+	[Export] public PackedScene TrashScene { get; set; } = null!;
 
 	[Export] public Texture2D[] CarTextures { get; set; } = null!;
+	public Vector2 Direction { get; set; } = Vector2.Left;
+	private bool onScreen = false;
+	private bool droppedTrash = false;
 
 	public override void _Ready()
 	{
@@ -22,10 +25,28 @@ public partial class Car : Node2D
 	public override void _Process(double delta)
 	{
 		Position += Direction * Speed * (float)delta;
+
+		if(onScreen && !droppedTrash && GD.Randi() % 100 < 1)
+		{
+			GD.Print("Dropping trash from car");
+			droppedTrash = true;
+			Trash trash = TrashScene.Instantiate<Trash>();
+
+			var trashSpawnMarker = GetNode<Marker2D>("TrashSpawnMarker");
+			trash.GlobalPosition = trashSpawnMarker.GlobalPosition;
+
+			var TrashContainer = GetParent().GetNode<Node2D>("../TrashContainer");
+			TrashContainer.AddChild(trash);
+		}
 	}
 	
 	private void OnVisibleOnScreenNotifier2DScreenExited()
 	{
+		onScreen = false;
 		QueueFree();
+	}
+	private void OnVisibleOnScreenNotifier2DScreenEntered()
+	{
+		onScreen = true;
 	}
 }

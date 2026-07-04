@@ -13,7 +13,9 @@ public partial class Main : Node2D
 		Node2D spawnPoints = GetNode<Node2D>("PersonSpawnMarkers");
 		Marker2D spawnPoint = GetRandomChild(spawnPoints) as Marker2D ?? throw new Exception("No spawn points found.");
 		person.Position = spawnPoint.Position;
-		AddChild(person);
+
+		var SpawnedEntities = GetNode<Node2D>("SpawnedEntities");
+		SpawnedEntities.AddChild(person);
 	}
 
 	private void OnCarSpawnTimerTimeout()
@@ -23,7 +25,9 @@ public partial class Main : Node2D
 		Node2D spawnPoints = GetNode<Node2D>("CarSpawnMarkers");
 		Marker2D spawnPoint = GetRandomChild(spawnPoints) as Marker2D ?? throw new Exception("No spawn points found.");
 		car.Position = spawnPoint.Position;
-		AddChild(car);
+
+		var SpawnedEntities = GetNode<Node2D>("SpawnedEntities");
+		SpawnedEntities.AddChild(car);
 	}
 
 

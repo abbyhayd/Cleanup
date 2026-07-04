@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://c8ylb5531w058"]
+
+[ext_resource type="Texture2D" uid="uid://ckedtnpjsvxpl" path="res://icon.svg" id="1_3xixx"]
+[ext_resource type="Script" uid="uid://cskh5t8ubpfa7" path="res://scripts/Trash.cs" id="1_exrr5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2cl6o"]
+size = Vector2(34, 34)
+
+[node name="Trash" type="Area2D" unique_id=1494899442]
+y_sort_enabled = true
+script = ExtResource("1_exrr5")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1827870440]
+scale = Vector2(0.265625, 0.265625)
+texture = ExtResource("1_3xixx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2142786931]
+shape = SubResource("RectangleShape2D_2cl6o")
+
+[connection signal="input_event" from="." to="." method="OnInputEvent"]
