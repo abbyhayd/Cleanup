@@ -43,7 +43,10 @@ animations = [{
 "speed": 7.0
 }]
 
-[node name="Person" type="Node2D" unique_id=32785012]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2cl6o"]
+size = Vector2(47, 79)
+
+[node name="Person" type="Area2D" unique_id=1969147701]
 y_sort_enabled = true
 script = ExtResource("1_8qhow")
 TrashScene = ExtResource("2_yhvuw")
@@ -54,11 +57,17 @@ scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_2cl6o")
 animation = &"walk "
 autoplay = "walk "
-frame_progress = 0.64866245
+frame = 1
+frame_progress = 0.07785942
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=598568248]
 
 [node name="TrashSpawnMarker" type="Marker2D" parent="." unique_id=1176138398]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1214525512]
+position = Vector2(-3.5, -29.5)
+shape = SubResource("RectangleShape2D_2cl6o")
+debug_color = Color(0.3910513, 0.47266722, 1, 0.41960785)
 
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="OnVisibleOnScreenNotifier2DScreenEntered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="OnVisibleOnScreenNotifier2DScreenExited"]

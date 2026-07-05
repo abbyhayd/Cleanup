@@ -6,10 +6,13 @@
 [ext_resource type="Texture2D" uid="uid://bdckiryi8ctgb" path="res://assets/car/grey_car.png" id="3_3mrxu"]
 [ext_resource type="Texture2D" uid="uid://ct1vnpgsguqni" path="res://assets/car/orange_car.png" id="4_cp117"]
 
-[node name="Car" type="Node2D" unique_id=1998896927]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2cl6o"]
+size = Vector2(39, 85)
+
+[node name="Car" type="Area2D" unique_id=363066690]
 script = ExtResource("1_c35m8")
-TrashScene = ExtResource("2_3mrxu")
 CarTextures = Array[Texture2D]([ExtResource("2_jtldb"), ExtResource("3_3mrxu"), ExtResource("4_cp117")])
+TrashScene = ExtResource("2_3mrxu")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1951987109]
 y_sort_enabled = true
@@ -21,6 +24,11 @@ texture = ExtResource("2_jtldb")
 y_sort_enabled = true
 
 [node name="TrashSpawnMarker" type="Marker2D" parent="." unique_id=1066658236]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=186492434]
+position = Vector2(3.5, -44.5)
+shape = SubResource("RectangleShape2D_2cl6o")
+debug_color = Color(0.6592539, 0.5154746, 5.7756904e-07, 0.41960785)
 
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="OnVisibleOnScreenNotifier2DScreenEntered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="OnVisibleOnScreenNotifier2DScreenExited"]

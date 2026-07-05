@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://u0jb27d5jyrv" path="res://scenes/car.tscn" id="3_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://58evmpcxv6l3" path="res://scenes/hud.tscn" id="5_tbgi4"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2cl6o"]
+size = Vector2(915, 377)
+
 [node name="Main" type="Node2D" unique_id=1394223643]
 script = ExtResource("1_0wfyh")
 PersonScene = ExtResource("2_jyhfs")
@@ -39,10 +42,12 @@ position = Vector2(-110, 440)
 [node name="Right" type="Marker2D" parent="CarSpawnMarkers" unique_id=1537880200]
 position = Vector2(1275, 327)
 
-[node name="PersonSpawnTimer" type="Timer" parent="." unique_id=521843671]
+[node name="Timers" type="Node" parent="." unique_id=2098574205]
+
+[node name="PersonSpawnTimer" type="Timer" parent="Timers" unique_id=521843671]
 autostart = true
 
-[node name="CarSpawnTimer" type="Timer" parent="." unique_id=1414951355]
+[node name="CarSpawnTimer" type="Timer" parent="Timers" unique_id=1414951355]
 wait_time = 1.5
 autostart = true
 
@@ -57,5 +62,12 @@ offset_top = 349.0
 offset_right = -460.0
 offset_bottom = 349.0
 
-[connection signal="timeout" from="PersonSpawnTimer" to="." method="OnPersonSpawnTimerTimeout"]
-[connection signal="timeout" from="CarSpawnTimer" to="." method="OnCarSpawnTimerTimeout"]
+[node name="TrashSpawnArea" type="Area2D" parent="." unique_id=1546231759]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrashSpawnArea" unique_id=295835430]
+position = Vector2(574.5, 357.5)
+shape = SubResource("RectangleShape2D_2cl6o")
+
+[connection signal="timeout" from="Timers/PersonSpawnTimer" to="." method="OnPersonSpawnTimerTimeout"]
+[connection signal="timeout" from="Timers/CarSpawnTimer" to="." method="OnCarSpawnTimerTimeout"]
+[connection signal="area_entered" from="TrashSpawnArea" to="." method="OnTrashSpawnAreaAreaEntered"]

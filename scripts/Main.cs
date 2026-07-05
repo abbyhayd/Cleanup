@@ -13,11 +13,11 @@ public partial class Main : Node2D
 
 	public override void _Ready()
 	{
-		_personSpawnTimer = GetNode<Timer>("PersonSpawnTimer");
+		_personSpawnTimer = GetNode<Timer>("Timers/PersonSpawnTimer");
 		_personSpawnTimer.WaitTime = GameManager.DEFAULT_PERSON_SPAWN_TIME;
 		_personSpawnTimer.Start();
 
-		_carSpawnTimer = GetNode<Timer>("CarSpawnTimer");
+		_carSpawnTimer = GetNode<Timer>("Timers/CarSpawnTimer");
 		_carSpawnTimer.WaitTime = GameManager.DEFAULT_CAR_SPAWN_TIME;
 		_carSpawnTimer.Start();
 
@@ -53,6 +53,14 @@ public partial class Main : Node2D
 		_carSpawnTimer.WaitTime = GameManager.DEFAULT_CAR_SPAWN_TIME * GameManager.RUSHHOUR_CAR_SPAWN_MULTIPLIER;
 	}
 
+	private void OnTrashSpawnAreaAreaEntered(Area2D area)
+	{
+		if(area is TrashDropper td)
+		{
+			GD.Print($"{area} entered");
+			td.InTrashSpawnArea = true;
+		}
+	}
 
 	private Node GetRandomChild(Node parent)
 	{

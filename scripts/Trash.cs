@@ -7,7 +7,6 @@ public partial class Trash : Area2D
 	{
 		if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed)
 		{
-			GD.Print("Trash clicked");
 			QueueFree();
 			GameManager.Score += 1;
 		}

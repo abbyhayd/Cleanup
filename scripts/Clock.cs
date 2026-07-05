@@ -11,6 +11,7 @@ public partial class Clock : Control
 	private int _curMinute;
 	private CustomSignals _customSignals;
 	private bool _rushHourStarted = false;
+	private bool _dayEnded = false;
 
 	public override void _Ready()
 	{
@@ -45,7 +46,7 @@ public partial class Clock : Control
 				{
 					StartRushHour();
 				}
-				if(dt.Hours >= 6 && dt.Hours != 12)
+				if(dt.Hours >= 6 && dt.Hours != 12 && !_dayEnded)
 				{
 					EndDay();
 				}
@@ -62,5 +63,21 @@ public partial class Clock : Control
 	private void EndDay()
 	{
 		GD.Print("End of Day");
+		_dayEnded = true;
+		_customSignals.EmitSignal("DayEnd");
+	}
+	public void StartDay()
+	{
+		_rushHourStarted = false;
+		_dayEnded = false;
+		if(dateTime is DateTime dt)
+		{
+			dt.Hours = 12;
+			dt.Minutes = 0;
+			dt.Seconds = 0;
+			dt.TotalElapsedMinutes = 0;
+		}
+		var ClockArrow = GetNode<TextureRect>("ClockArrow");
+		ClockArrow.RotationDegrees = 69.0f;
 	}
 }
