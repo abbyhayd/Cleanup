@@ -9,7 +9,7 @@ public partial class DateTime : Resource
 
     [Export(PropertyHint.Range,"0, 59")] public int Minutes { get; set; } = 0;
 
-    [Export(PropertyHint.Range,"1, 12")] public int Hours { get; set; } = 5;
+    [Export(PropertyHint.Range,"1, 12")] public int Hours { get; set; } = 12;
     public int TotalElapsedMinutes { get; set; } = 0;
 
     private float deltaTime = 0.0f;

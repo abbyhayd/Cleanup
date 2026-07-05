@@ -14,9 +14,9 @@ public partial class Hud : Control
 		_customSignals.Connect("DayEnd", new Callable(this, nameof(DayEnd)));
 		_customSignals.Connect("DayStart",new Callable(this, nameof(DayStart)));
 
-		_rushHourLabel = GetNode<Label>("CanvasLayer/RushHourLabel");
-		_scoreLabel = GetNode<Label>("CanvasLayer/ScoreLabel");
-		_endOfDayPanel = GetNode<Panel>("CanvasLayer/EndOfDayPanel");
+		_rushHourLabel = GetNode<Label>("RushHourLabel");
+		_scoreLabel = GetNode<Label>("ScoreLabel");
+		_endOfDayPanel = GetNode<Panel>("EndOfDayPanel");
 	}
 	public override void _Process(double delta)
 	{

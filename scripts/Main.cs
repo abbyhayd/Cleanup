@@ -12,8 +12,16 @@ public partial class Main : Node2D
 	private Timer _carSpawnTimer;
 	private CustomSignals _customSignals;
 
+	private Tween _cameraTween;
+	private Camera2D _camera;
+
+
+	//from 577, -769 to 577, 325
+
 	public override void _Ready()
 	{
+		_camera = GetNode<Camera2D>("Camera2D");
+
 		_personSpawnTimer = GetNode<Timer>("Timers/PersonSpawnTimer");
 		_personSpawnTimer.WaitTime = GameManager.DEFAULT_PERSON_SPAWN_TIME;
 
@@ -34,6 +42,14 @@ public partial class Main : Node2D
 		Node2D spawnPoints = GetNode<Node2D>("PersonSpawnMarkers");
 		Marker2D spawnPoint = GetRandomChild(spawnPoints) as Marker2D ?? throw new Exception("No spawn points found.");
 		person.Position = spawnPoint.Position;
+		if(spawnPoint.Name == "TopLeft" || spawnPoint.Name == "TopRight")
+		{
+			person.ZIndex = 1;
+		}
+		else
+		{
+			person.ZIndex = 4;
+		}
 
 		var SpawnedEntities = GetNode<Node2D>("SpawnedEntities");
 		SpawnedEntities.AddChild(person);
@@ -45,6 +61,14 @@ public partial class Main : Node2D
 		Node2D spawnPoints = GetNode<Node2D>("CarSpawnMarkers");
 		Marker2D spawnPoint = GetRandomChild(spawnPoints) as Marker2D ?? throw new Exception("No spawn points found.");
 		car.Position = spawnPoint.Position;
+		if(spawnPoint.Name == "Right")
+		{
+			car.ZIndex = 2;
+		}
+		else
+		{
+			car.ZIndex = 3;
+		}
 
 		var SpawnedEntities = GetNode<Node2D>("SpawnedEntities");
 		SpawnedEntities.AddChild(car);
@@ -66,7 +90,6 @@ public partial class Main : Node2D
 	}
 	public void DayStart()
 	{
-		GD.Print("Day started in main");
 		_personSpawnTimer.WaitTime = GameManager.DEFAULT_PERSON_SPAWN_TIME;
 		_carSpawnTimer.WaitTime = GameManager.DEFAULT_CAR_SPAWN_TIME;
 		_personSpawnTimer.Start();
@@ -79,6 +102,23 @@ public partial class Main : Node2D
 		{
 			td.InTrashSpawnArea = true;
 		}
+	}
+	private void OnTrashSpawnAreaAreaExited(Area2D area)
+	{
+		if(area is TrashDropper td)
+		{
+			td.InTrashSpawnArea = false;
+		}
+	}
+	public async void OnStartButtonPressed()
+	{
+		_cameraTween = CreateTween();
+		_cameraTween.SetTrans(Tween.TransitionType.Sine);
+        _cameraTween.SetEase(Tween.EaseType.Out);
+
+		_cameraTween.TweenProperty(_camera, "global_position", new Vector2(577, 325), 1.5f);
+		await ToSignal(_cameraTween, Tween.SignalName.Finished);
+		_customSignals.EmitSignal("DayStart");
 	}
 
 	private Node GetRandomChild(Node parent)

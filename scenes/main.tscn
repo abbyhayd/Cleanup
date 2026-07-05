@@ -14,9 +14,12 @@ script = ExtResource("1_0wfyh")
 PersonScene = ExtResource("2_jyhfs")
 CarScene = ExtResource("3_jyhfs")
 
+[node name="Camera2D" type="Camera2D" parent="." unique_id=513527200]
+position = Vector2(577, -769)
+
 [node name="BG" type="Sprite2D" parent="." unique_id=158001986]
 z_index = -999
-position = Vector2(574.444, 233)
+position = Vector2(577, -312.99994)
 scale = Vector2(1.8000001, 1.8000001)
 texture = ExtResource("2_sugp2")
 
@@ -45,29 +48,81 @@ position = Vector2(1275, 327)
 [node name="Timers" type="Node" parent="." unique_id=2098574205]
 
 [node name="PersonSpawnTimer" type="Timer" parent="Timers" unique_id=521843671]
-autostart = true
 
 [node name="CarSpawnTimer" type="Timer" parent="Timers" unique_id=1414951355]
 wait_time = 1.5
-autostart = true
 
 [node name="SpawnedEntities" type="Node2D" parent="." unique_id=904055766]
 y_sort_enabled = true
 
 [node name="TrashContainer" type="Node2D" parent="." unique_id=534563673]
 
-[node name="Hud" parent="." unique_id=1137055739 instance=ExtResource("5_tbgi4")]
-offset_left = -460.0
-offset_top = 349.0
-offset_right = -460.0
-offset_bottom = 349.0
-
 [node name="TrashSpawnArea" type="Area2D" parent="." unique_id=1546231759]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TrashSpawnArea" unique_id=295835430]
 position = Vector2(574.5, 357.5)
 shape = SubResource("RectangleShape2D_2cl6o")
 
+[node name="Hud" parent="." unique_id=1137055739 instance=ExtResource("5_tbgi4")]
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+
+[node name="StartMenu" type="Control" parent="." unique_id=180785488]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Title" type="Label" parent="StartMenu" unique_id=548472707]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 313.0
+offset_top = -963.0
+offset_right = 799.0
+offset_bottom = -806.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 115
+text = "Clean up"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StartMenu" unique_id=33670258]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 388.0
+offset_top = -795.0
+offset_right = 724.0
+offset_bottom = -568.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartButton" type="Button" parent="StartMenu/VBoxContainer" unique_id=1261228023]
+layout_mode = 2
+theme_override_font_sizes/font_size = 47
+text = "Start
+"
+
+[node name="SettingButton" type="Button" parent="StartMenu/VBoxContainer" unique_id=1213974273]
+layout_mode = 2
+theme_override_font_sizes/font_size = 47
+text = "Setting"
+
+[node name="CreditButton" type="Button" parent="StartMenu/VBoxContainer" unique_id=939332670]
+layout_mode = 2
+theme_override_font_sizes/font_size = 47
+text = "Credits"
+
 [connection signal="timeout" from="Timers/PersonSpawnTimer" to="." method="OnPersonSpawnTimerTimeout"]
 [connection signal="timeout" from="Timers/CarSpawnTimer" to="." method="OnCarSpawnTimerTimeout"]
 [connection signal="area_entered" from="TrashSpawnArea" to="." method="OnTrashSpawnAreaAreaEntered"]
+[connection signal="area_exited" from="TrashSpawnArea" to="." method="OnTrashSpawnAreaAreaExited"]
+[connection signal="pressed" from="StartMenu/VBoxContainer/StartButton" to="." method="OnStartButtonPressed"]

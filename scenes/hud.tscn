@@ -13,48 +13,54 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_oo0fn")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1725661250]
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1945353828]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1945353828]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("1_ahhtf")
 expand_mode = 2
 
-[node name="ScoreLabel" type="Label" parent="CanvasLayer" unique_id=1587256636]
+[node name="ScoreLabel" type="Label" parent="." unique_id=1587256636]
+layout_mode = 0
 offset_left = 912.0
 offset_top = 560.0
 offset_right = 1010.0
 offset_bottom = 638.0
 theme_override_font_sizes/font_size = 57
+text = "0"
 horizontal_alignment = 1
 
-[node name="Clock" parent="CanvasLayer" unique_id=1522393874 instance=ExtResource("3_5ysmq")]
+[node name="Clock" parent="." unique_id=1522393874 instance=ExtResource("3_5ysmq")]
+layout_mode = 0
 offset_left = 6.0
 offset_top = 555.0
 offset_right = 6.0
 offset_bottom = 555.0
+mouse_filter = 2
 
-[node name="RushHourLabel" type="Label" parent="CanvasLayer" unique_id=1844209001]
+[node name="RushHourLabel" type="Label" parent="." unique_id=1844209001]
 visible = false
+layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -168.5
+offset_left = -215.0
 offset_top = 70.295
-offset_right = 168.5
-offset_bottom = 134.29506
+offset_right = 215.0
+offset_bottom = 166.295
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 70
 text = "RUSH HOUR!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="EndOfDayPanel" type="Panel" parent="CanvasLayer" unique_id=2091665591]
+[node name="EndOfDayPanel" type="Panel" parent="." unique_id=2091665591]
 visible = false
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -66,8 +72,9 @@ offset_right = 110.0
 offset_bottom = 110.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/EndOfDayPanel" unique_id=1636951723]
+[node name="Label" type="Label" parent="EndOfDayPanel" unique_id=1636951723]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -82,7 +89,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Day Ended"
 
-[node name="NextDayButton" type="Button" parent="CanvasLayer/EndOfDayPanel" unique_id=1955259735]
+[node name="NextDayButton" type="Button" parent="EndOfDayPanel" unique_id=1955259735]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -97,4 +104,4 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Next Day"
 
-[connection signal="pressed" from="CanvasLayer/EndOfDayPanel/NextDayButton" to="." method="OnNextDayButtonPressed"]
+[connection signal="pressed" from="EndOfDayPanel/NextDayButton" to="." method="OnNextDayButtonPressed"]
