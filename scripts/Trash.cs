@@ -9,7 +9,7 @@ public partial class Trash : Area2D
 		{
 			GD.Print("Trash clicked");
 			QueueFree();
-			Global.Score += 1;
+			GameManager.Score += 1;
 		}
 	}
 }

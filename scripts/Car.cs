@@ -26,7 +26,7 @@ public partial class Car : Node2D
 	{
 		Position += Direction * Speed * (float)delta;
 
-		if(onScreen && !droppedTrash && GD.Randf() < Global.TRASH_SPAWN_CHANCE)
+		if(onScreen && !droppedTrash && GD.Randf() < GameManager.TRASH_SPAWN_CHANCE)
 		{
 			// GD.Print("Dropping trash from car");
 			droppedTrash = true;

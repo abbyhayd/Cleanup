@@ -52,6 +52,10 @@ y_sort_enabled = true
 [node name="TrashContainer" type="Node2D" parent="." unique_id=534563673]
 
 [node name="Hud" parent="." unique_id=1137055739 instance=ExtResource("5_tbgi4")]
+offset_left = -460.0
+offset_top = 349.0
+offset_right = -460.0
+offset_bottom = 349.0
 
 [connection signal="timeout" from="PersonSpawnTimer" to="." method="OnPersonSpawnTimerTimeout"]
 [connection signal="timeout" from="CarSpawnTimer" to="." method="OnCarSpawnTimerTimeout"]

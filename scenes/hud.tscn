@@ -37,3 +37,18 @@ offset_left = 6.0
 offset_top = 555.0
 offset_right = 6.0
 offset_bottom = 555.0
+
+[node name="RushHourLabel" type="Label" parent="CanvasLayer" unique_id=1844209001]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -168.5
+offset_top = 70.295
+offset_right = 168.5
+offset_bottom = 134.29506
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 70
+text = "RUSH HOUR!"
+horizontal_alignment = 1
+vertical_alignment = 1

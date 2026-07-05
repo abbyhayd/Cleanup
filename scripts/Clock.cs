@@ -9,6 +9,13 @@ public partial class Clock : Control
 	[Export] public int TotalMinutesInDay {get; set;} = 300;
 	private int _prevMinute;
 	private int _curMinute;
+	private CustomSignals _customSignals;
+	private bool _rushHourStarted = false;
+
+	public override void _Ready()
+	{
+		_customSignals = GetNode<CustomSignals>("/root/CustomSignals");
+	}
 
     public override void _Process(double delta)
     {
@@ -34,9 +41,26 @@ public partial class Clock : Control
 				_prevMinute = _curMinute;
 				
 				ClockArrow.RotationDegrees += anglePerMinute;
-				GD.Print($"Clock Arrow Rotation: {ClockArrow.RotationDegrees}");
+				if(dt.Hours >= 4 && dt.Hours < 6 && !_rushHourStarted)
+				{
+					StartRushHour();
+				}
+				if(dt.Hours >= 6 && dt.Hours != 12)
+				{
+					EndDay();
+				}
 			}
-			
 		}
+	}
+
+	private void StartRushHour()
+	{
+		_rushHourStarted = true;
+		GD.Print("Rush Hour Started");
+		_customSignals.EmitSignal("RushHour");
+	}
+	private void EndDay()
+	{
+		GD.Print("End of Day");
 	}
 }
