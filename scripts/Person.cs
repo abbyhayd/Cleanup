@@ -12,9 +12,9 @@ public partial class Person : TrashDropper
 
 		var animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 
-		string[] _humanVariations = animatedSprite2D.SpriteFrames.GetAnimationNames();
-		int randomIndex = (int)(GD.Randi() % (uint)_humanVariations.Length);
-		animatedSprite2D.Play(_humanVariations[randomIndex]);
+		string[] humanVariations = animatedSprite2D.SpriteFrames.GetAnimationNames();
+		int randomIndex = (int)(GD.Randi() % (uint)humanVariations.Length);
+		animatedSprite2D.Play(humanVariations[randomIndex]);
 
 		if(Position.X > 0)
 		{

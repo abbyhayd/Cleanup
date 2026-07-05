@@ -1,7 +1,12 @@
 [gd_scene format=3 uid="uid://c8ylb5531w058"]
 
-[ext_resource type="Texture2D" uid="uid://ckedtnpjsvxpl" path="res://icon.svg" id="1_3xixx"]
 [ext_resource type="Script" uid="uid://cskh5t8ubpfa7" path="res://scripts/Trash.cs" id="1_exrr5"]
+[ext_resource type="Texture2D" uid="uid://jecplfu00k37" path="res://assets/trash assets/crumpled paper 1.png" id="2_2g7r5"]
+[ext_resource type="Texture2D" uid="uid://1wioo6lcenhj" path="res://assets/trash assets/garbage bag small 1.png" id="3_4sf1q"]
+[ext_resource type="Texture2D" uid="uid://dfi8a106v2uq" path="res://assets/trash assets/water bottle crumpled.png" id="5_0q2p5"]
+[ext_resource type="Texture2D" uid="uid://mcblhk1jpahg" path="res://assets/trash assets/can.png" id="5_24v10"]
+[ext_resource type="Texture2D" uid="uid://cpxjrpa0wg66k" path="res://assets/trash assets/banana_peel.png" id="6_2g7r5"]
+[ext_resource type="Texture2D" uid="uid://dvd2ho0exu5cy" path="res://assets/trash assets/apple_core.png" id="7_4sf1q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2cl6o"]
 size = Vector2(34, 34)
@@ -9,10 +14,9 @@ size = Vector2(34, 34)
 [node name="Trash" type="Area2D" unique_id=1494899442]
 y_sort_enabled = true
 script = ExtResource("1_exrr5")
+trashTextures = Array[Texture2D]([ExtResource("2_2g7r5"), ExtResource("3_4sf1q"), ExtResource("5_0q2p5"), ExtResource("5_24v10"), ExtResource("6_2g7r5"), ExtResource("7_4sf1q")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1827870440]
-scale = Vector2(0.265625, 0.265625)
-texture = ExtResource("1_3xixx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2142786931]
 shape = SubResource("RectangleShape2D_2cl6o")

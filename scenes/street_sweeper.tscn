@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cbp0ocg2dxwi7"]
+
+[ext_resource type="Texture2D" uid="uid://dbpbnlhxm582d" path="res://assets/car/street_sweeper.png" id="1_f6dk8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2cl6o"]
+
+[node name="StreetSweeper" type="Area2D" unique_id=992828995]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=109318282]
+shape = SubResource("RectangleShape2D_2cl6o")
+
+[node name="AnimatedSprite2D" type="Sprite2D" parent="." unique_id=1862632922]
+scale = Vector2(5, 5)
+texture = ExtResource("1_f6dk8")

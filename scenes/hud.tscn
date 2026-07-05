@@ -23,6 +23,7 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("1_ahhtf")
 expand_mode = 2
+metadata/_edit_lock_ = true
 
 [node name="ScoreLabel" type="Label" parent="." unique_id=1587256636]
 layout_mode = 0
@@ -33,6 +34,7 @@ offset_bottom = 638.0
 theme_override_font_sizes/font_size = 57
 text = "0"
 horizontal_alignment = 1
+metadata/_edit_lock_ = true
 
 [node name="Clock" parent="." unique_id=1522393874 instance=ExtResource("3_5ysmq")]
 layout_mode = 0
@@ -41,6 +43,7 @@ offset_top = 555.0
 offset_right = 6.0
 offset_bottom = 555.0
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="RushHourLabel" type="Label" parent="." unique_id=1844209001]
 visible = false
@@ -57,6 +60,7 @@ theme_override_font_sizes/font_size = 70
 text = "RUSH HOUR!"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_lock_ = true
 
 [node name="EndOfDayPanel" type="Panel" parent="." unique_id=2091665591]
 visible = false
@@ -103,5 +107,24 @@ offset_bottom = -26.169998
 grow_horizontal = 2
 grow_vertical = 0
 text = "Next Day"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=991834292]
+layout_mode = 0
+offset_left = 329.0
+offset_top = 568.0
+offset_right = 818.0
+offset_bottom = 632.0
+theme_override_constants/separation = 160
+alignment = 1
+
+[node name="StreetCleanerButton" type="Button" parent="HBoxContainer" unique_id=1722387306]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Street Cleaner"
+
+[node name="SidewalkCleanerButton" type="Button" parent="HBoxContainer" unique_id=2006545929]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Sidewalk Cleaner"
 
 [connection signal="pressed" from="EndOfDayPanel/NextDayButton" to="." method="OnNextDayButtonPressed"]

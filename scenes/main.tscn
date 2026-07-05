@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://b5wp3vv8e3jta" path="res://assets/background.png" id="2_sugp2"]
 [ext_resource type="PackedScene" uid="uid://u0jb27d5jyrv" path="res://scenes/car.tscn" id="3_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://58evmpcxv6l3" path="res://scenes/hud.tscn" id="5_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://cbp0ocg2dxwi7" path="res://scenes/street_sweeper.tscn" id="6_tefeu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2cl6o"]
 size = Vector2(915, 377)
@@ -49,8 +50,10 @@ position = Vector2(1275, 327)
 
 [node name="PersonSpawnTimer" type="Timer" parent="Timers" unique_id=521843671]
 
-[node name="CarSpawnTimer" type="Timer" parent="Timers" unique_id=1414951355]
+[node name="CarLeftSpawnTimer" type="Timer" parent="Timers" unique_id=1414951355]
 wait_time = 1.5
+
+[node name="CarRightSpawnTimer" type="Timer" parent="Timers" unique_id=433373738]
 
 [node name="SpawnedEntities" type="Node2D" parent="." unique_id=904055766]
 y_sort_enabled = true
@@ -121,8 +124,15 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 47
 text = "Credits"
 
+[node name="Area2D" parent="." unique_id=992828995 instance=ExtResource("6_tefeu")]
+position = Vector2(697, 232)
+
+[node name="Car" parent="." unique_id=363066690 instance=ExtResource("3_jyhfs")]
+position = Vector2(379, 325)
+
 [connection signal="timeout" from="Timers/PersonSpawnTimer" to="." method="OnPersonSpawnTimerTimeout"]
-[connection signal="timeout" from="Timers/CarSpawnTimer" to="." method="OnCarSpawnTimerTimeout"]
+[connection signal="timeout" from="Timers/CarLeftSpawnTimer" to="." method="OnCarLeftSpawnTimerTimeout"]
+[connection signal="timeout" from="Timers/CarRightSpawnTimer" to="." method="OnCarRightSpawnTimerTimeout"]
 [connection signal="area_entered" from="TrashSpawnArea" to="." method="OnTrashSpawnAreaAreaEntered"]
 [connection signal="area_exited" from="TrashSpawnArea" to="." method="OnTrashSpawnAreaAreaExited"]
 [connection signal="pressed" from="StartMenu/VBoxContainer/StartButton" to="." method="OnStartButtonPressed"]

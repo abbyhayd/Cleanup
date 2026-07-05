@@ -9,7 +9,8 @@ public partial class Main : Node2D
 	private Node2D _trashContainer;
 
 	private Timer _personSpawnTimer;
-	private Timer _carSpawnTimer;
+	private Timer _carLeftSpawnTimer;
+	private Timer _carRightSpawnTimer;
 	private CustomSignals _customSignals;
 
 	private Tween _cameraTween;
@@ -25,8 +26,10 @@ public partial class Main : Node2D
 		_personSpawnTimer = GetNode<Timer>("Timers/PersonSpawnTimer");
 		_personSpawnTimer.WaitTime = GameManager.DEFAULT_PERSON_SPAWN_TIME;
 
-		_carSpawnTimer = GetNode<Timer>("Timers/CarSpawnTimer");
-		_carSpawnTimer.WaitTime = GameManager.DEFAULT_CAR_SPAWN_TIME;
+		_carLeftSpawnTimer = GetNode<Timer>("Timers/CarLeftSpawnTimer");
+		_carLeftSpawnTimer.WaitTime = GameManager.DEFAULT_CAR_SPAWN_TIME;
+		_carRightSpawnTimer = GetNode<Timer>("Timers/CarRightSpawnTimer");
+		_carRightSpawnTimer.WaitTime = GameManager.DEFAULT_CAR_SPAWN_TIME;
 
 		_trashContainer = GetNode<Node2D>("TrashContainer");
 
@@ -55,21 +58,21 @@ public partial class Main : Node2D
 		SpawnedEntities.AddChild(person);
 	}
 
-	private void OnCarSpawnTimerTimeout()
+	private void OnCarLeftSpawnTimerTimeout()
 	{
 		Car car = CarScene.Instantiate<Car>();
-		Node2D spawnPoints = GetNode<Node2D>("CarSpawnMarkers");
-		Marker2D spawnPoint = GetRandomChild(spawnPoints) as Marker2D ?? throw new Exception("No spawn points found.");
-		car.Position = spawnPoint.Position;
-		if(spawnPoint.Name == "Right")
-		{
-			car.ZIndex = 2;
-		}
-		else
-		{
-			car.ZIndex = 3;
-		}
-
+		Marker2D leftSpawnPoint = GetNode<Marker2D>("CarSpawnMarkers/Left");
+		car.Position = leftSpawnPoint.Position;
+		car.ZIndex = 3;
+		var SpawnedEntities = GetNode<Node2D>("SpawnedEntities");
+		SpawnedEntities.AddChild(car);
+	}
+	private void OnCarRightSpawnTimerTimeout()
+	{
+		Car car = CarScene.Instantiate<Car>();
+		Marker2D rightSpawnPoint = GetNode<Marker2D>("CarSpawnMarkers/Right");
+		car.Position = rightSpawnPoint.Position;
+		car.ZIndex = 2;
 		var SpawnedEntities = GetNode<Node2D>("SpawnedEntities");
 		SpawnedEntities.AddChild(car);
 	}
@@ -77,7 +80,8 @@ public partial class Main : Node2D
 	public void RushHourStarted()
 	{
 		_personSpawnTimer.WaitTime = GameManager.DEFAULT_PERSON_SPAWN_TIME * GameManager.RUSHHOUR_PERSON_SPAWN_MULTIPLIER;
-		_carSpawnTimer.WaitTime = GameManager.DEFAULT_CAR_SPAWN_TIME * GameManager.RUSHHOUR_CAR_SPAWN_MULTIPLIER;
+		_carRightSpawnTimer.WaitTime = GameManager.DEFAULT_CAR_SPAWN_TIME * GameManager.RUSHHOUR_CAR_SPAWN_MULTIPLIER;
+		_carLeftSpawnTimer.WaitTime = GameManager.DEFAULT_CAR_SPAWN_TIME * GameManager.RUSHHOUR_CAR_SPAWN_MULTIPLIER;
 	}
 	public void DayEnd()
 	{
@@ -86,14 +90,18 @@ public partial class Main : Node2D
 			child.QueueFree();
 		}
 		_personSpawnTimer.Stop();
-		_carSpawnTimer.Stop();
+		_carLeftSpawnTimer.Stop();
+		_carRightSpawnTimer.Stop();
 	}
 	public void DayStart()
 	{
 		_personSpawnTimer.WaitTime = GameManager.DEFAULT_PERSON_SPAWN_TIME;
-		_carSpawnTimer.WaitTime = GameManager.DEFAULT_CAR_SPAWN_TIME;
+		_carLeftSpawnTimer.WaitTime = GameManager.DEFAULT_CAR_SPAWN_TIME;
+		_carRightSpawnTimer.WaitTime = GameManager.DEFAULT_CAR_SPAWN_TIME;
+
 		_personSpawnTimer.Start();
-		_carSpawnTimer.Start();
+		_carLeftSpawnTimer.Start();
+		_carRightSpawnTimer.Start();
 	}
 
 	private void OnTrashSpawnAreaAreaEntered(Area2D area)
