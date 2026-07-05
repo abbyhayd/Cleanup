@@ -5,6 +5,7 @@ public partial class Person : TrashDropper
 {
 	public override void _Ready()
 	{
+		base._Ready();
 		Speed = 200.0f;
 		Direction = Vector2.Right;
 

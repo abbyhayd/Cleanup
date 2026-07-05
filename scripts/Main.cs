@@ -6,6 +6,7 @@ public partial class Main : Node2D
 
 	[Export] public PackedScene PersonScene {get; set;} = null!;
 	[Export] public PackedScene CarScene {get; set;} = null!;
+	private Node2D _trashContainer;
 
 	private Timer _personSpawnTimer;
 	private Timer _carSpawnTimer;
@@ -15,14 +16,16 @@ public partial class Main : Node2D
 	{
 		_personSpawnTimer = GetNode<Timer>("Timers/PersonSpawnTimer");
 		_personSpawnTimer.WaitTime = GameManager.DEFAULT_PERSON_SPAWN_TIME;
-		_personSpawnTimer.Start();
 
 		_carSpawnTimer = GetNode<Timer>("Timers/CarSpawnTimer");
 		_carSpawnTimer.WaitTime = GameManager.DEFAULT_CAR_SPAWN_TIME;
-		_carSpawnTimer.Start();
+
+		_trashContainer = GetNode<Node2D>("TrashContainer");
 
 		_customSignals = GetNode<CustomSignals>("/root/CustomSignals");
 		_customSignals.Connect("RushHour", new Callable(this, nameof(RushHourStarted)));
+		_customSignals.Connect("DayEnd", new Callable(this, nameof(DayEnd)));
+		_customSignals.Connect("DayStart", new Callable(this, nameof(DayStart)));
 	}
 
 	private void OnPersonSpawnTimerTimeout()
@@ -52,12 +55,28 @@ public partial class Main : Node2D
 		_personSpawnTimer.WaitTime = GameManager.DEFAULT_PERSON_SPAWN_TIME * GameManager.RUSHHOUR_PERSON_SPAWN_MULTIPLIER;
 		_carSpawnTimer.WaitTime = GameManager.DEFAULT_CAR_SPAWN_TIME * GameManager.RUSHHOUR_CAR_SPAWN_MULTIPLIER;
 	}
+	public void DayEnd()
+	{
+		foreach(Node child in _trashContainer.GetChildren())
+		{
+			child.QueueFree();
+		}
+		_personSpawnTimer.Stop();
+		_carSpawnTimer.Stop();
+	}
+	public void DayStart()
+	{
+		GD.Print("Day started in main");
+		_personSpawnTimer.WaitTime = GameManager.DEFAULT_PERSON_SPAWN_TIME;
+		_carSpawnTimer.WaitTime = GameManager.DEFAULT_CAR_SPAWN_TIME;
+		_personSpawnTimer.Start();
+		_carSpawnTimer.Start();
+	}
 
 	private void OnTrashSpawnAreaAreaEntered(Area2D area)
 	{
 		if(area is TrashDropper td)
 		{
-			GD.Print($"{area} entered");
 			td.InTrashSpawnArea = true;
 		}
 	}

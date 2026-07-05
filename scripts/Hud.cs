@@ -11,7 +11,8 @@ public partial class Hud : Control
 	{
 		_customSignals = GetNode<CustomSignals>("/root/CustomSignals");
 		_customSignals.Connect("RushHour", new Callable(this, nameof(RushHourStarted)));
-		_customSignals.Connect("DayEnd", new Callable(this, nameof(EndOfDay)));
+		_customSignals.Connect("DayEnd", new Callable(this, nameof(DayEnd)));
+		_customSignals.Connect("DayStart",new Callable(this, nameof(DayStart)));
 
 		_rushHourLabel = GetNode<Label>("CanvasLayer/RushHourLabel");
 		_scoreLabel = GetNode<Label>("CanvasLayer/ScoreLabel");
@@ -22,13 +23,22 @@ public partial class Hud : Control
 		_scoreLabel.Text = $"{GameManager.Score}";
 	}
 
-	public void RushHourStarted()
+	private void RushHourStarted()
 	{
 		_rushHourLabel.Visible = true;
 	}
 
-	public void EndOfDay()
+	private void DayEnd()
 	{
 		_endOfDayPanel.Visible = true;
+		_rushHourLabel.Visible = false;
+	}
+	private void DayStart()
+	{
+		_endOfDayPanel.Visible = false;
+	}
+	public void OnNextDayButtonPressed()
+	{
+		_customSignals.EmitSignal("DayStart");
 	}
 }

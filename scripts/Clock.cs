@@ -16,11 +16,12 @@ public partial class Clock : Control
 	public override void _Ready()
 	{
 		_customSignals = GetNode<CustomSignals>("/root/CustomSignals");
+		_customSignals.Connect("DayStart", new Callable(this, "DayStart"));
 	}
 
     public override void _Process(double delta)
     {
-        if(dateTime is DateTime dt)
+        if(dateTime is DateTime dt && !_dayEnded)
 		{	
 			dt.IncreaseBySec((float)delta * ticksPerSecond);
 			UpdateClock();
@@ -48,7 +49,7 @@ public partial class Clock : Control
 				}
 				if(dt.Hours >= 6 && dt.Hours != 12 && !_dayEnded)
 				{
-					EndDay();
+					DayEnd();
 				}
 			}
 		}
@@ -57,16 +58,14 @@ public partial class Clock : Control
 	private void StartRushHour()
 	{
 		_rushHourStarted = true;
-		GD.Print("Rush Hour Started");
 		_customSignals.EmitSignal("RushHour");
 	}
-	private void EndDay()
+	private void DayEnd()
 	{
-		GD.Print("End of Day");
 		_dayEnded = true;
 		_customSignals.EmitSignal("DayEnd");
 	}
-	public void StartDay()
+	private void DayStart()
 	{
 		_rushHourStarted = false;
 		_dayEnded = false;
@@ -78,6 +77,6 @@ public partial class Clock : Control
 			dt.TotalElapsedMinutes = 0;
 		}
 		var ClockArrow = GetNode<TextureRect>("ClockArrow");
-		ClockArrow.RotationDegrees = 69.0f;
+		ClockArrow.RotationDegrees = -69.0f;
 	}
 }

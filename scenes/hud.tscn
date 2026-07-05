@@ -82,7 +82,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Day Ended"
 
-[node name="Button" type="Button" parent="CanvasLayer/EndOfDayPanel" unique_id=1955259735]
+[node name="NextDayButton" type="Button" parent="CanvasLayer/EndOfDayPanel" unique_id=1955259735]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -95,4 +95,6 @@ offset_right = 49.0
 offset_bottom = -26.169998
 grow_horizontal = 2
 grow_vertical = 0
-text = "Restart Day"
+text = "Next Day"
+
+[connection signal="pressed" from="CanvasLayer/EndOfDayPanel/NextDayButton" to="." method="OnNextDayButtonPressed"]

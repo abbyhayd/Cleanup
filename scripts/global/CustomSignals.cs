@@ -5,4 +5,5 @@ public partial class CustomSignals : Node
 {
 	[Signal] public delegate void RushHourEventHandler();
 	[Signal] public delegate void DayEndEventHandler();
+	[Signal] public delegate void DayStartEventHandler();
 }
