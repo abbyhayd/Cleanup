@@ -1,14 +1,25 @@
 [gd_scene format=3 uid="uid://cbp0ocg2dxwi7"]
 
+[ext_resource type="Script" uid="uid://btgpmah4oki02" path="res://scripts/entities/StreetSweeper.cs" id="1_ee34g"]
 [ext_resource type="Texture2D" uid="uid://dbpbnlhxm582d" path="res://assets/car/street_sweeper.png" id="1_f6dk8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2cl6o"]
+size = Vector2(202, 68)
 
 [node name="StreetSweeper" type="Area2D" unique_id=992828995]
+y_sort_enabled = true
+script = ExtResource("1_ee34g")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=109318282]
+position = Vector2(13, 63)
 shape = SubResource("RectangleShape2D_2cl6o")
 
-[node name="AnimatedSprite2D" type="Sprite2D" parent="." unique_id=1862632922]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2062201771]
+y_sort_enabled = true
 scale = Vector2(5, 5)
 texture = ExtResource("1_f6dk8")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=837894462]
+
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="OnVisibleOnScreenNotifier2DScreenExited"]

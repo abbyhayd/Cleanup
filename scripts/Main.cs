@@ -6,6 +6,8 @@ public partial class Main : Node2D
 
 	[Export] public PackedScene PersonScene {get; set;} = null!;
 	[Export] public PackedScene CarScene {get; set;} = null!;
+	[Export] public PackedScene StreetSweeperScene {get; set;} = null!;
+	[Export] public PackedScene SidewalkSweeperScene {get; set;} = null!;
 	private Node2D _trashContainer;
 
 	private Timer _personSpawnTimer;
@@ -16,8 +18,6 @@ public partial class Main : Node2D
 	private Tween _cameraTween;
 	private Camera2D _camera;
 
-
-	//from 577, -769 to 577, 325
 
 	public override void _Ready()
 	{
@@ -37,8 +37,11 @@ public partial class Main : Node2D
 		_customSignals.Connect("RushHour", new Callable(this, nameof(RushHourStarted)));
 		_customSignals.Connect("DayEnd", new Callable(this, nameof(DayEnd)));
 		_customSignals.Connect("DayStart", new Callable(this, nameof(DayStart)));
+		_customSignals.Connect("StreetSweeperSpawned", new Callable(this, nameof(SpawnStreetSweeper)));
+		_customSignals.Connect("SidewalkSweeperSpawned", new Callable(this, nameof(SpawnSidewalkSweeper)));
 	}
 
+	//=====================SPAWN CONTROL========================
 	private void OnPersonSpawnTimerTimeout()
 	{
 		Person person = PersonScene.Instantiate<Person>();
@@ -77,6 +80,24 @@ public partial class Main : Node2D
 		SpawnedEntities.AddChild(car);
 	}
 
+	private void SpawnStreetSweeper(Vector2 position)
+	{
+		StreetSweeper sweeper = StreetSweeperScene.Instantiate<StreetSweeper>();
+		sweeper.Position = position;
+		var SpawnedEntities = GetNode<Node2D>("SpawnedEntities");
+		SpawnedEntities.AddChild(sweeper);
+	}
+	private void SpawnSidewalkSweeper(Vector2 position)
+	{
+		SidewalkSweeper sweeper = SidewalkSweeperScene.Instantiate<SidewalkSweeper>();
+		sweeper.Position = position;
+		var SpawnedEntities = GetNode<Node2D>("SpawnedEntities");
+		SpawnedEntities.AddChild(sweeper);
+	}
+	//============================================================
+
+
+	//======================DAY CONTROL======================
 	public void RushHourStarted()
 	{
 		_personSpawnTimer.WaitTime = GameManager.DEFAULT_PERSON_SPAWN_TIME * GameManager.RUSHHOUR_PERSON_SPAWN_MULTIPLIER;
@@ -103,6 +124,7 @@ public partial class Main : Node2D
 		_carLeftSpawnTimer.Start();
 		_carRightSpawnTimer.Start();
 	}
+	//====================================================================
 
 	private void OnTrashSpawnAreaAreaEntered(Area2D area)
 	{

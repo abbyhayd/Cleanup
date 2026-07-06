@@ -4,16 +4,46 @@
 [ext_resource type="PackedScene" uid="uid://dl2vv046sjdw7" path="res://scenes/person.tscn" id="2_jyhfs"]
 [ext_resource type="Texture2D" uid="uid://b5wp3vv8e3jta" path="res://assets/background.png" id="2_sugp2"]
 [ext_resource type="PackedScene" uid="uid://u0jb27d5jyrv" path="res://scenes/car.tscn" id="3_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://cdxjitip5o715" path="res://scenes/sidewalk_sweeper.tscn" id="5_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://58evmpcxv6l3" path="res://scenes/hud.tscn" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://cbp0ocg2dxwi7" path="res://scenes/street_sweeper.tscn" id="6_tefeu"]
+[ext_resource type="FontFile" uid="uid://crnhyew0akrji" path="res://assets/hud/BoldPixels.ttf" id="8_tipki"]
+[ext_resource type="LabelSettings" uid="uid://dmmsjr0maw375" path="res://assets/hud/startmenu_label.tres" id="9_85g3d"]
+[ext_resource type="Texture2D" uid="uid://bmg7dd8x0v0mc" path="res://assets/trash assets/box_sprites.png" id="9_choun"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2cl6o"]
 size = Vector2(915, 377)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_choun"]
+atlas = ExtResource("9_choun")
+region = Rect2(0, 32, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i17dv"]
+atlas = ExtResource("9_choun")
+region = Rect2(66, 32, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cl6o"]
+atlas = ExtResource("9_choun")
+region = Rect2(0, 0, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ya4ey"]
+atlas = ExtResource("9_choun")
+region = Rect2(66, 0, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ly126"]
+atlas = ExtResource("9_choun")
+region = Rect2(0, 16, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eb6dy"]
+atlas = ExtResource("9_choun")
+region = Rect2(66, 16, 64, 16)
 
 [node name="Main" type="Node2D" unique_id=1394223643]
 script = ExtResource("1_0wfyh")
 PersonScene = ExtResource("2_jyhfs")
 CarScene = ExtResource("3_jyhfs")
+StreetSweeperScene = ExtResource("6_tefeu")
+SidewalkSweeperScene = ExtResource("5_o6xl0")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=513527200]
 position = Vector2(577, -769)
@@ -85,14 +115,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 313.0
-offset_top = -963.0
-offset_right = 799.0
-offset_bottom = -806.0
+offset_left = 191.0
+offset_top = -1018.0
+offset_right = 921.0
+offset_bottom = -838.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 115
+theme_override_fonts/font = ExtResource("8_tipki")
+theme_override_font_sizes/font_size = 205
 text = "Clean up"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="StartMenu" unique_id=33670258]
 layout_mode = 1
@@ -107,28 +140,81 @@ offset_right = 724.0
 offset_bottom = -568.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 20
 
-[node name="StartButton" type="Button" parent="StartMenu/VBoxContainer" unique_id=1261228023]
+[node name="StartButton" type="TextureButton" parent="StartMenu/VBoxContainer" unique_id=2052615939]
+custom_minimum_size = Vector2(384, 96)
 layout_mode = 2
-theme_override_font_sizes/font_size = 47
-text = "Start
-"
+texture_normal = SubResource("AtlasTexture_choun")
+texture_hover = SubResource("AtlasTexture_i17dv")
+stretch_mode = 0
 
-[node name="SettingButton" type="Button" parent="StartMenu/VBoxContainer" unique_id=1213974273]
+[node name="Label" type="Label" parent="StartMenu/VBoxContainer/StartButton" unique_id=102546341]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -126.5
+offset_top = -39.5
+offset_right = 126.5
+offset_bottom = 39.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "START"
+label_settings = ExtResource("9_85g3d")
+
+[node name="SettingButton" type="TextureButton" parent="StartMenu/VBoxContainer" unique_id=306268403]
+custom_minimum_size = Vector2(384, 96)
 layout_mode = 2
-theme_override_font_sizes/font_size = 47
-text = "Setting"
+texture_normal = SubResource("AtlasTexture_2cl6o")
+texture_hover = SubResource("AtlasTexture_ya4ey")
+stretch_mode = 0
 
-[node name="CreditButton" type="Button" parent="StartMenu/VBoxContainer" unique_id=939332670]
+[node name="Label" type="Label" parent="StartMenu/VBoxContainer/SettingButton" unique_id=331122266]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -152.0
+offset_top = -39.5
+offset_right = 152.0
+offset_bottom = 39.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("8_tipki")
+theme_override_font_sizes/font_size = 80
+text = "SETTINGS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CreditButton" type="TextureButton" parent="StartMenu/VBoxContainer" unique_id=163640799]
+custom_minimum_size = Vector2(384, 96)
 layout_mode = 2
-theme_override_font_sizes/font_size = 47
-text = "Credits"
+texture_normal = SubResource("AtlasTexture_ly126")
+texture_hover = SubResource("AtlasTexture_eb6dy")
+stretch_mode = 0
 
-[node name="Area2D" parent="." unique_id=992828995 instance=ExtResource("6_tefeu")]
-position = Vector2(697, 232)
-
-[node name="Car" parent="." unique_id=363066690 instance=ExtResource("3_jyhfs")]
-position = Vector2(379, 325)
+[node name="Label" type="Label" parent="StartMenu/VBoxContainer/CreditButton" unique_id=937343793]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "CREDIT"
+label_settings = ExtResource("9_85g3d")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="timeout" from="Timers/PersonSpawnTimer" to="." method="OnPersonSpawnTimerTimeout"]
 [connection signal="timeout" from="Timers/CarLeftSpawnTimer" to="." method="OnCarLeftSpawnTimerTimeout"]

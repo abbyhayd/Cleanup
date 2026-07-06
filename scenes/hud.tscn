@@ -3,6 +3,19 @@
 [ext_resource type="Texture2D" uid="uid://d28ifevfetgt5" path="res://assets/hud/overlay.png" id="1_ahhtf"]
 [ext_resource type="Script" uid="uid://cbh3c26koahwn" path="res://scripts/Hud.cs" id="1_oo0fn"]
 [ext_resource type="PackedScene" uid="uid://bm8psgd81u2n3" path="res://scenes/clock.tscn" id="3_5ysmq"]
+[ext_resource type="FontFile" uid="uid://crnhyew0akrji" path="res://assets/hud/BoldPixels.ttf" id="3_hd3ao"]
+[ext_resource type="Texture2D" uid="uid://dx7her3rjp70c" path="res://assets/car/street_sweeper_transparent.png" id="4_uo2fv"]
+[ext_resource type="Texture2D" uid="uid://dbpbnlhxm582d" path="res://assets/car/street_sweeper.png" id="5_047uy"]
+[ext_resource type="Texture2D" uid="uid://dm7erkuqwd7pe" path="res://assets/person/sidewalk_sweeper_transparent.png" id="6_5pdws"]
+[ext_resource type="Texture2D" uid="uid://cmcki1h7nogvp" path="res://assets/person/sidewalk_sweeper.png" id="7_hd3ao"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ysfrn"]
+atlas = ExtResource("7_hd3ao")
+region = Rect2(0, 0, 33, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5pdws"]
+atlas = ExtResource("7_hd3ao")
+region = Rect2(0, 0, 33, 47)
 
 [node name="Hud" type="Control" unique_id=1137055739]
 layout_mode = 3
@@ -28,13 +41,14 @@ metadata/_edit_lock_ = true
 [node name="ScoreLabel" type="Label" parent="." unique_id=1587256636]
 layout_mode = 0
 offset_left = 912.0
-offset_top = 560.0
+offset_top = 556.0
 offset_right = 1010.0
-offset_bottom = 638.0
-theme_override_font_sizes/font_size = 57
+offset_bottom = 643.0
+theme_override_fonts/font = ExtResource("3_hd3ao")
+theme_override_font_sizes/font_size = 98
 text = "0"
 horizontal_alignment = 1
-metadata/_edit_lock_ = true
+vertical_alignment = 1
 
 [node name="Clock" parent="." unique_id=1522393874 instance=ExtResource("3_5ysmq")]
 layout_mode = 0
@@ -108,23 +122,109 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Next Day"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=991834292]
+[node name="ToolButtons" type="HBoxContainer" parent="." unique_id=991834292]
 layout_mode = 0
-offset_left = 329.0
-offset_top = 568.0
-offset_right = 818.0
-offset_bottom = 632.0
-theme_override_constants/separation = 160
+offset_left = 343.5
+offset_top = 560.0
+offset_right = 803.5
+offset_bottom = 638.0
+theme_override_constants/separation = 100
 alignment = 1
 
-[node name="StreetCleanerButton" type="Button" parent="HBoxContainer" unique_id=1722387306]
+[node name="StreetSweeperButton" type="Button" parent="ToolButtons" unique_id=1722387306]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_hd3ao")
+theme_override_font_sizes/font_size = 38
 text = "Street Cleaner"
+autowrap_mode = 3
 
-[node name="SidewalkCleanerButton" type="Button" parent="HBoxContainer" unique_id=2006545929]
+[node name="SidewalkSweeperButton" type="Button" parent="ToolButtons" unique_id=2006545929]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_hd3ao")
+theme_override_font_sizes/font_size = 37
 text = "Sidewalk Cleaner"
+autowrap_mode = 3
+
+[node name="Tools" type="Control" parent="." unique_id=1092102423]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_lock_ = true
+
+[node name="TopStreetSweeperButton" type="TextureButton" parent="Tools" unique_id=528264978]
+visible = false
+z_index = 7
+layout_mode = 0
+offset_left = 961.00006
+offset_top = 134.00002
+offset_right = 1026.0
+offset_bottom = 174.00002
+scale = Vector2(5, 5)
+texture_normal = ExtResource("4_uo2fv")
+texture_hover = ExtResource("5_047uy")
+
+[node name="BottomStreetSweeperButton" type="TextureButton" parent="Tools" unique_id=257968975]
+visible = false
+z_index = 7
+layout_mode = 0
+offset_left = -139.0
+offset_top = 239.0
+offset_right = -74.0
+offset_bottom = 279.0
+scale = Vector2(5, 5)
+texture_normal = ExtResource("4_uo2fv")
+texture_hover = ExtResource("5_047uy")
+flip_h = true
+
+[node name="TopSidewalkSweeperButton" type="TextureButton" parent="Tools" unique_id=1823621979]
+visible = false
+layout_mode = 0
+offset_top = 34.0
+offset_right = 40.0
+offset_bottom = 81.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("6_5pdws")
+texture_hover = SubResource("AtlasTexture_ysfrn")
+
+[node name="BottomSidewalkSweeperButton" type="TextureButton" parent="Tools" unique_id=1419117817]
+visible = false
+layout_mode = 0
+offset_left = 1015.0
+offset_top = 340.0
+offset_right = 1055.0
+offset_bottom = 387.0
+scale = Vector2(4, 4)
+texture_normal = ExtResource("6_5pdws")
+texture_hover = SubResource("AtlasTexture_5pdws")
+flip_h = true
+
+[node name="StreetCleanerCost" type="Label" parent="." unique_id=540059778]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 552.0
+offset_right = 360.0
+offset_bottom = 609.0
+theme_override_fonts/font = ExtResource("3_hd3ao")
+theme_override_font_sizes/font_size = 57
+text = "10"
+
+[node name="SidewalkCleanerCost" type="Label" parent="." unique_id=2121645156]
+layout_mode = 0
+offset_left = 790.0
+offset_top = 552.0
+offset_right = 854.0
+offset_bottom = 669.0
+theme_override_fonts/font = ExtResource("3_hd3ao")
+theme_override_font_sizes/font_size = 57
+text = "10
+"
 
 [connection signal="pressed" from="EndOfDayPanel/NextDayButton" to="." method="OnNextDayButtonPressed"]
+[connection signal="pressed" from="ToolButtons/StreetSweeperButton" to="." method="OnStreetSweeperButton"]
+[connection signal="pressed" from="ToolButtons/SidewalkSweeperButton" to="." method="OnSidewalkSweeperButton"]
+[connection signal="pressed" from="Tools/TopStreetSweeperButton" to="." method="OnTopStreetSweeperButton"]
+[connection signal="pressed" from="Tools/BottomStreetSweeperButton" to="." method="OnBottomStreetSweeperButton"]
+[connection signal="pressed" from="Tools/TopSidewalkSweeperButton" to="." method="OnTopSidewalkSweeperButton"]
+[connection signal="pressed" from="Tools/BottomSidewalkSweeperButton" to="." method="OnBottomSidewalkSweeperButton"]

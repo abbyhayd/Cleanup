@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c8ylb5531w058"]
 
-[ext_resource type="Script" uid="uid://cskh5t8ubpfa7" path="res://scripts/Trash.cs" id="1_exrr5"]
+[ext_resource type="Script" uid="uid://cskh5t8ubpfa7" path="res://scripts/entities/Trash.cs" id="1_exrr5"]
 [ext_resource type="Texture2D" uid="uid://jecplfu00k37" path="res://assets/trash assets/crumpled paper 1.png" id="2_2g7r5"]
 [ext_resource type="Texture2D" uid="uid://1wioo6lcenhj" path="res://assets/trash assets/garbage bag small 1.png" id="3_4sf1q"]
 [ext_resource type="Texture2D" uid="uid://dfi8a106v2uq" path="res://assets/trash assets/water bottle crumpled.png" id="5_0q2p5"]

@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://dmmsjr0maw375"]
+
+[ext_resource type="FontFile" uid="uid://crnhyew0akrji" path="res://assets/hud/BoldPixels.ttf" id="1_i17dv"]
+
+[resource]
+font = ExtResource("1_i17dv")
+font_size = 90

@@ -18,8 +18,15 @@ public partial class Trash : Area2D
 	{
 		if (@event is InputEventMouseButton mouseEvent && mouseEvent.Pressed)
 		{
-			QueueFree();
-			GameManager.Score += 1;
+			Cleaned();
 		}
 	}
+
+	public void Cleaned()
+	{
+		GameManager.Score += 1;
+		QueueFree();
+	}
+
+
 }

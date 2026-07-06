@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://cdxjitip5o715"]
+
+[ext_resource type="Script" uid="uid://b3yuo8mlusckb" path="res://scripts/entities/SidewalkSweeper.cs" id="1_psxiq"]
+[ext_resource type="Texture2D" uid="uid://cmcki1h7nogvp" path="res://assets/person/sidewalk_sweeper.png" id="1_xbbs6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2cl6o"]
+size = Vector2(144, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_psxiq"]
+atlas = ExtResource("1_xbbs6")
+region = Rect2(0, 0, 33, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ysfrn"]
+atlas = ExtResource("1_xbbs6")
+region = Rect2(33, 0, 33, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5v8bt"]
+atlas = ExtResource("1_xbbs6")
+region = Rect2(66, 0, 33, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8ti5"]
+atlas = ExtResource("1_xbbs6")
+region = Rect2(99, 0, 33, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tuev3"]
+atlas = ExtResource("1_xbbs6")
+region = Rect2(132, 0, 33, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oiw6r"]
+atlas = ExtResource("1_xbbs6")
+region = Rect2(165, 0, 33, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hm2bc"]
+atlas = ExtResource("1_xbbs6")
+region = Rect2(198, 0, 33, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmv8t"]
+atlas = ExtResource("1_xbbs6")
+region = Rect2(231, 0, 33, 47)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2cl6o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_psxiq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ysfrn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5v8bt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t8ti5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tuev3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oiw6r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hm2bc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wmv8t")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 7.0
+}]
+
+[node name="SidewalkSweeper" type="Area2D" unique_id=1617143577]
+script = ExtResource("1_psxiq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1147351008]
+position = Vector2(0, 63)
+shape = SubResource("RectangleShape2D_2cl6o")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=329343371]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_2cl6o")
+animation = &"walk"
+autoplay = "walk"
+frame = 4
+frame_progress = 0.09119679
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=448624994]
+
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="OnVisibleOnScreenNotifier2DScreenExited"]
