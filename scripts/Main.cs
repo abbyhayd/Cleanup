@@ -150,6 +150,35 @@ public partial class Main : Node2D
 		await ToSignal(_cameraTween, Tween.SignalName.Finished);
 		_customSignals.EmitSignal("DayStart");
 	}
+	public async void OnSettingsButtonPressed()
+	{
+		//(1729,-772) - (2305, -772)
+		_cameraTween = CreateTween();
+		_cameraTween.SetTrans(Tween.TransitionType.Sine);
+        _cameraTween.SetEase(Tween.EaseType.Out);
+
+		_cameraTween.TweenProperty(_camera, "global_position", new Vector2(1729,-772), 1.5f);
+		await ToSignal(_cameraTween, Tween.SignalName.Finished);
+	}
+	public async void OnCreditsButtonPressed()
+	{ 
+		//(-577, -772) - (-1152, -772 )
+		_cameraTween = CreateTween();
+		_cameraTween.SetTrans(Tween.TransitionType.Sine);
+        _cameraTween.SetEase(Tween.EaseType.Out);
+
+		_cameraTween.TweenProperty(_camera, "global_position", new Vector2(-577, -772), 1.5f);
+		await ToSignal(_cameraTween, Tween.SignalName.Finished);
+	}
+	public async void OnBackButtonPressed()
+	{
+		_cameraTween = CreateTween();
+		_cameraTween.SetTrans(Tween.TransitionType.Sine);
+        _cameraTween.SetEase(Tween.EaseType.Out);
+
+		_cameraTween.TweenProperty(_camera, "global_position", new Vector2(577, -772), 1.5f);
+		await ToSignal(_cameraTween, Tween.SignalName.Finished);
+	}
 
 	private Node GetRandomChild(Node parent)
 	{

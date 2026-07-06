@@ -5,9 +5,26 @@
 [ext_resource type="PackedScene" uid="uid://bm8psgd81u2n3" path="res://scenes/clock.tscn" id="3_5ysmq"]
 [ext_resource type="FontFile" uid="uid://crnhyew0akrji" path="res://assets/hud/BoldPixels.ttf" id="3_hd3ao"]
 [ext_resource type="Texture2D" uid="uid://dx7her3rjp70c" path="res://assets/car/street_sweeper_transparent.png" id="4_uo2fv"]
+[ext_resource type="Texture2D" uid="uid://bmg7dd8x0v0mc" path="res://assets/trash assets/box_sprites.png" id="5_0i1j5"]
 [ext_resource type="Texture2D" uid="uid://dbpbnlhxm582d" path="res://assets/car/street_sweeper.png" id="5_047uy"]
 [ext_resource type="Texture2D" uid="uid://dm7erkuqwd7pe" path="res://assets/person/sidewalk_sweeper_transparent.png" id="6_5pdws"]
 [ext_resource type="Texture2D" uid="uid://cmcki1h7nogvp" path="res://assets/person/sidewalk_sweeper.png" id="7_hd3ao"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cl6o"]
+atlas = ExtResource("5_0i1j5")
+region = Rect2(0, 16, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ly126"]
+atlas = ExtResource("5_0i1j5")
+region = Rect2(66, 16, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y3ix0"]
+atlas = ExtResource("5_0i1j5")
+region = Rect2(0, 0, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ia4vg"]
+atlas = ExtResource("5_0i1j5")
+region = Rect2(66, 0, 64, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ysfrn"]
 atlas = ExtResource("7_hd3ao")
@@ -70,7 +87,8 @@ offset_top = 70.295
 offset_right = 215.0
 offset_bottom = 166.295
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 70
+theme_override_fonts/font = ExtResource("3_hd3ao")
+theme_override_font_sizes/font_size = 111
 text = "RUSH HOUR!"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -131,21 +149,55 @@ offset_bottom = 638.0
 theme_override_constants/separation = 100
 alignment = 1
 
-[node name="StreetSweeperButton" type="Button" parent="ToolButtons" unique_id=1722387306]
+[node name="StreetSweeperButton" type="TextureButton" parent="ToolButtons" unique_id=444384184]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_hd3ao")
-theme_override_font_sizes/font_size = 38
-text = "Street Cleaner"
-autowrap_mode = 3
+texture_normal = SubResource("AtlasTexture_2cl6o")
+texture_hover = SubResource("AtlasTexture_ly126")
+stretch_mode = 0
 
-[node name="SidewalkSweeperButton" type="Button" parent="ToolButtons" unique_id=2006545929]
+[node name="Label" type="Label" parent="ToolButtons/StreetSweeperButton" unique_id=1202526882]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -74.5
+offset_top = -34.5
+offset_right = 74.5
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_hd3ao")
+theme_override_font_sizes/font_size = 37
+text = "Street Cleaner"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="SidewalkSweeperButton" type="TextureButton" parent="ToolButtons" unique_id=301186877]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
+texture_normal = SubResource("AtlasTexture_y3ix0")
+texture_hover = SubResource("AtlasTexture_ia4vg")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="ToolButtons/SidewalkSweeperButton" unique_id=342167169]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_hd3ao")
 theme_override_font_sizes/font_size = 37
 text = "Sidewalk Cleaner"
-autowrap_mode = 3
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="Tools" type="Control" parent="." unique_id=1092102423]
 anchors_preset = 0
