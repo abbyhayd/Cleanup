@@ -9,8 +9,9 @@ public partial class Main : Node2D
 	[Export] public PackedScene StreetSweeperScene {get; set;} = null!;
 	[Export] public PackedScene SidewalkSweeperScene {get; set;} = null!;
 	private Node2D _trashContainer;
-
-	private Timer _personSpawnTimer;
+	private Node2D _spawnedEntities;
+	private Timer _personTopSpawnTimer;
+	private Timer _personBottomSpawnTimer;
 	private Timer _carLeftSpawnTimer;
 	private Timer _carRightSpawnTimer;
 	private CustomSignals _customSignals;
@@ -32,8 +33,10 @@ public partial class Main : Node2D
 	{
 		_camera = GetNode<Camera2D>("Camera2D");
 
-		_personSpawnTimer = GetNode<Timer>("Timers/PersonSpawnTimer");
-		_personSpawnTimer.WaitTime = GameManager.DEFAULT_PERSON_SPAWN_TIME;
+		_personTopSpawnTimer = GetNode<Timer>("Timers/PersonTopSpawnTimer");
+		_personBottomSpawnTimer = GetNode<Timer>("Timers/PersonBottomSpawnTimer");
+		_personTopSpawnTimer.WaitTime = GameManager.DEFAULT_PERSON_SPAWN_TIME;
+		_personBottomSpawnTimer.WaitTime = GameManager.DEFAULT_PERSON_SPAWN_TIME;
 
 		_carLeftSpawnTimer = GetNode<Timer>("Timers/CarLeftSpawnTimer");
 		_carLeftSpawnTimer.WaitTime = GameManager.DEFAULT_CAR_SPAWN_TIME;
@@ -41,6 +44,7 @@ public partial class Main : Node2D
 		_carRightSpawnTimer.WaitTime = GameManager.DEFAULT_CAR_SPAWN_TIME;
 
 		_trashContainer = GetNode<Node2D>("TrashContainer");
+		_spawnedEntities = GetNode<Node2D>("SpawnedEntities");
 		_startMenu = GetNode<Control>("StartMenu");
 		_settingsMenu = GetNode<Control>("SettingsMenu");
 		_audio = GetNode<AudioStreamPlayer>("ButtonSelectSound");
@@ -56,23 +60,43 @@ public partial class Main : Node2D
 	}
 
 	//=====================SPAWN CONTROL========================
-	private void OnPersonSpawnTimerTimeout()
+	// private void OnPersonSpawnTimerTimeout()
+	// {
+	// 	Person person = PersonScene.Instantiate<Person>();
+	// 	Node2D spawnPoints = GetNode<Node2D>("PersonSpawnMarkers");
+	// 	Marker2D spawnPoint = GetRandomChild(spawnPoints) as Marker2D ?? throw new Exception("No spawn points found.");
+	// 	person.Position = spawnPoint.Position;
+	// 	if(spawnPoint.Name == "TopLeft" || spawnPoint.Name == "TopRight")
+	// 	{
+	// 		person.ZIndex = 1;
+	// 	}
+	// 	else
+	// 	{
+	// 		person.ZIndex = 4;
+	// 	}
+
+	// 	var SpawnedEntities = GetNode<Node2D>("SpawnedEntities");
+	// 	SpawnedEntities.AddChild(person);
+	// }
+	private void OnPersonTopSpawnTimerTimeout()
 	{
 		Person person = PersonScene.Instantiate<Person>();
-		Node2D spawnPoints = GetNode<Node2D>("PersonSpawnMarkers");
-		Marker2D spawnPoint = GetRandomChild(spawnPoints) as Marker2D ?? throw new Exception("No spawn points found.");
+		Marker2D topLeft = GetNode<Marker2D>("PersonSpawnMarkers/TopLeft");
+		Marker2D topRight = GetNode<Marker2D>("PersonSpawnMarkers/TopRight");
+		Marker2D spawnPoint = Random.Shared.Next(2) == 0 ? topLeft : topRight;
 		person.Position = spawnPoint.Position;
-		if(spawnPoint.Name == "TopLeft" || spawnPoint.Name == "TopRight")
-		{
-			person.ZIndex = 1;
-		}
-		else
-		{
-			person.ZIndex = 4;
-		}
-
-		var SpawnedEntities = GetNode<Node2D>("SpawnedEntities");
-		SpawnedEntities.AddChild(person);
+		person.ZIndex = 1;
+		_spawnedEntities.AddChild(person);
+	}
+	private void OnPersonBottomSpawnTimerTimeout()
+	{
+		Person person = PersonScene.Instantiate<Person>();
+		Marker2D bottomLeft = GetNode<Marker2D>("PersonSpawnMarkers/BottomLeft");
+		Marker2D bottomRight = GetNode<Marker2D>("PersonSpawnMarkers/BottomRight");
+		Marker2D spawnPoint = Random.Shared.Next(2) == 0 ? bottomLeft : bottomRight;
+		person.Position = spawnPoint.Position;
+		person.ZIndex = 4;
+		_spawnedEntities.AddChild(person);
 	}
 	private void OnCarLeftSpawnTimerTimeout()
 	{
@@ -80,8 +104,7 @@ public partial class Main : Node2D
 		Marker2D leftSpawnPoint = GetNode<Marker2D>("CarSpawnMarkers/Left");
 		car.Position = leftSpawnPoint.Position;
 		car.ZIndex = 3;
-		var SpawnedEntities = GetNode<Node2D>("SpawnedEntities");
-		SpawnedEntities.AddChild(car);
+		_spawnedEntities.AddChild(car);
 	}
 	private void OnCarRightSpawnTimerTimeout()
 	{
@@ -89,22 +112,19 @@ public partial class Main : Node2D
 		Marker2D rightSpawnPoint = GetNode<Marker2D>("CarSpawnMarkers/Right");
 		car.Position = rightSpawnPoint.Position;
 		car.ZIndex = 2;
-		var SpawnedEntities = GetNode<Node2D>("SpawnedEntities");
-		SpawnedEntities.AddChild(car);
+		_spawnedEntities.AddChild(car);
 	}
 	private void SpawnStreetSweeper(Vector2 position)
 	{
 		StreetSweeper sweeper = StreetSweeperScene.Instantiate<StreetSweeper>();
 		sweeper.Position = position;
-		var SpawnedEntities = GetNode<Node2D>("SpawnedEntities");
-		SpawnedEntities.AddChild(sweeper);
+		_spawnedEntities.AddChild(sweeper);
 	}
 	private void SpawnSidewalkSweeper(Vector2 position)
 	{
 		SidewalkSweeper sweeper = SidewalkSweeperScene.Instantiate<SidewalkSweeper>();
 		sweeper.Position = position;
-		var SpawnedEntities = GetNode<Node2D>("SpawnedEntities");
-		SpawnedEntities.AddChild(sweeper);
+		_spawnedEntities.AddChild(sweeper);
 	}
 	//============================================================
 
@@ -112,7 +132,9 @@ public partial class Main : Node2D
 	//======================DAY CONTROL======================
 	public void RushHourStarted()
 	{
-		_personSpawnTimer.WaitTime = GameManager.DEFAULT_PERSON_SPAWN_TIME * GameManager.RUSHHOUR_PERSON_SPAWN_MULTIPLIER;
+		_personTopSpawnTimer.WaitTime = GameManager.DEFAULT_PERSON_SPAWN_TIME * GameManager.RUSHHOUR_PERSON_SPAWN_MULTIPLIER;
+		_personBottomSpawnTimer.WaitTime = GameManager.DEFAULT_PERSON_SPAWN_TIME * GameManager.RUSHHOUR_PERSON_SPAWN_MULTIPLIER;
+
 		_carRightSpawnTimer.WaitTime = GameManager.DEFAULT_CAR_SPAWN_TIME * GameManager.RUSHHOUR_CAR_SPAWN_MULTIPLIER;
 		_carLeftSpawnTimer.WaitTime = GameManager.DEFAULT_CAR_SPAWN_TIME * GameManager.RUSHHOUR_CAR_SPAWN_MULTIPLIER;
 	}
@@ -122,21 +144,24 @@ public partial class Main : Node2D
 		{
 			child.QueueFree();
 		}
-		_personSpawnTimer.Stop();
+		_personTopSpawnTimer.Stop();
+		_personBottomSpawnTimer.Stop();
 		_carLeftSpawnTimer.Stop();
 		_carRightSpawnTimer.Stop();
 	}
 	public void DayStart()
 	{
-		_personSpawnTimer.WaitTime = GameManager.DEFAULT_PERSON_SPAWN_TIME;
+		_personTopSpawnTimer.WaitTime = GameManager.DEFAULT_PERSON_SPAWN_TIME;
+		_personBottomSpawnTimer.WaitTime = GameManager.DEFAULT_PERSON_SPAWN_TIME;
 		_carLeftSpawnTimer.WaitTime = GameManager.DEFAULT_CAR_SPAWN_TIME;
 		_carRightSpawnTimer.WaitTime = GameManager.DEFAULT_CAR_SPAWN_TIME;
 
-		_personSpawnTimer.Start();
+		_personTopSpawnTimer.Start();
+		_personBottomSpawnTimer.Start();
 		_carLeftSpawnTimer.Start();
 		_carRightSpawnTimer.Start();
 	}
-	//====================================================================
+	//========================================================
 
 	private void OnTrashSpawnAreaAreaEntered(Area2D area)
 	{
@@ -152,6 +177,20 @@ public partial class Main : Node2D
 			td.InTrashSpawnArea = false;
 		}
 	}
+	private Node GetRandomChild(Node parent)
+	{
+		int childCount = parent.GetChildCount();
+		if (childCount == 0)
+		{
+			return null!;
+		}
+
+		int randomIndex = (int)(GD.Randi() % childCount);
+		return parent.GetChild(randomIndex);
+
+	}
+	
+	//======================UI CONTROL======================
 	public async void OnStartButtonPressed()
 	{
 		_audio.Play();
@@ -221,18 +260,8 @@ public partial class Main : Node2D
 			await ToSignal(_cameraTween, Tween.SignalName.Finished);
 		}
 	}
-	private Node GetRandomChild(Node parent)
-	{
-		int childCount = parent.GetChildCount();
-		if (childCount == 0)
-		{
-			return null!;
-		}
-
-		int randomIndex = (int)(GD.Randi() % childCount);
-		return parent.GetChild(randomIndex);
-
-	}
+	
+	//========================================================
 
 	//====================AUDIO SLIDERS=============================
 	public void OnMusicSliderValueChanged(float value)

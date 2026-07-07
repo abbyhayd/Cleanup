@@ -18,4 +18,11 @@ public partial class StreetSweeper : TrashSweeper
 			ZIndex = 3;
 		}
     }
+	public void OnSweeperCollision(Area2D area)
+	{
+		if(area is Car car)
+		{
+			car.QueueFree();
+		}
+	}
 }

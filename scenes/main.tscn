@@ -90,10 +90,9 @@ texture = ExtResource("2_sugp2")
 metadata/_edit_lock_ = true
 
 [node name="PersonSpawnMarkers" type="Node2D" parent="." unique_id=1201360202]
-metadata/_edit_lock_ = true
 
 [node name="TopLeft" type="Marker2D" parent="PersonSpawnMarkers" unique_id=1500592129]
-position = Vector2(-50, 206)
+position = Vector2(-108, 206)
 
 [node name="TopRight" type="Marker2D" parent="PersonSpawnMarkers" unique_id=1742416583]
 position = Vector2(1185, 222)
@@ -102,7 +101,7 @@ position = Vector2(1185, 222)
 position = Vector2(-35, 512)
 
 [node name="BottomRight" type="Marker2D" parent="PersonSpawnMarkers" unique_id=2031353087]
-position = Vector2(1188, 530)
+position = Vector2(1236, 530)
 
 [node name="CarSpawnMarkers" type="Node2D" parent="." unique_id=1649334526]
 metadata/_edit_lock_ = true
@@ -115,7 +114,9 @@ position = Vector2(1275, 327)
 
 [node name="Timers" type="Node" parent="." unique_id=2098574205]
 
-[node name="PersonSpawnTimer" type="Timer" parent="Timers" unique_id=521843671]
+[node name="PersonTopSpawnTimer" type="Timer" parent="Timers" unique_id=782727212]
+
+[node name="PersonBottomSpawnTimer" type="Timer" parent="Timers" unique_id=521843671]
 
 [node name="CarLeftSpawnTimer" type="Timer" parent="Timers" unique_id=1414951355]
 wait_time = 1.5
@@ -484,7 +485,8 @@ stream = ExtResource("13_trceg")
 volume_db = -10.0
 bus = &"SFX"
 
-[connection signal="timeout" from="Timers/PersonSpawnTimer" to="." method="OnPersonSpawnTimerTimeout"]
+[connection signal="timeout" from="Timers/PersonTopSpawnTimer" to="." method="OnPersonTopSpawnTimerTimeout"]
+[connection signal="timeout" from="Timers/PersonBottomSpawnTimer" to="." method="OnPersonBottomSpawnTimerTimeout"]
 [connection signal="timeout" from="Timers/CarLeftSpawnTimer" to="." method="OnCarLeftSpawnTimerTimeout"]
 [connection signal="timeout" from="Timers/CarRightSpawnTimer" to="." method="OnCarRightSpawnTimerTimeout"]
 [connection signal="area_entered" from="TrashSpawnArea" to="." method="OnTrashSpawnAreaAreaEntered"]

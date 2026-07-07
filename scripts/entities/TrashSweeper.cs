@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 [GlobalClass]
 public partial class TrashSweeper : Area2D
@@ -21,7 +22,7 @@ public partial class TrashSweeper : Area2D
 	{
 		if(area is Trash trash)
 		{
-			trash.Cleaned();
+            _ = trash.Cleaned();
 		}
 	}
 

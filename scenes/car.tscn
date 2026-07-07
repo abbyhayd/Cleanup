@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://nip7y58jpqnu" path="res://assets/audio/car.mp3" id="6_cp117"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2cl6o"]
-size = Vector2(39, 85)
+size = Vector2(207, 85)
 
 [node name="Car" type="Area2D" unique_id=363066690]
 script = ExtResource("1_c35m8")
@@ -26,7 +26,7 @@ y_sort_enabled = true
 
 [node name="TrashSpawnMarker" type="Marker2D" parent="." unique_id=1066658236]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=186492434]
+[node name="CarCollision" type="CollisionShape2D" parent="." unique_id=186492434]
 position = Vector2(3.5, -44.5)
 shape = SubResource("RectangleShape2D_2cl6o")
 debug_color = Color(0.6592539, 0.5154746, 5.7756904e-07, 0.41960785)

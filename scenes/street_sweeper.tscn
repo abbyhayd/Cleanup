@@ -5,13 +5,16 @@
 [ext_resource type="AudioStream" uid="uid://nip7y58jpqnu" path="res://assets/audio/car.mp3" id="3_cnk1p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2cl6o"]
-size = Vector2(202, 68)
+size = Vector2(318, 70)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ly126"]
+size = Vector2(202, 67)
 
 [node name="StreetSweeper" type="Area2D" unique_id=992828995]
 y_sort_enabled = true
 script = ExtResource("1_ee34g")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=109318282]
+[node name="SweeperCollision" type="CollisionShape2D" parent="." unique_id=109318282]
 position = Vector2(13, 63)
 shape = SubResource("RectangleShape2D_2cl6o")
 
@@ -30,5 +33,13 @@ autoplay = true
 max_distance = 800.0
 bus = &"SFX"
 
-[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
+[node name="PickUpArea" type="Area2D" parent="." unique_id=275966233]
+
+[node name="PickUpCollision" type="CollisionShape2D" parent="PickUpArea" unique_id=1807745200]
+position = Vector2(13, 63.5)
+shape = SubResource("RectangleShape2D_ly126")
+debug_color = Color(0.66233635, 0.5138487, 1.92523e-07, 0.41960785)
+
+[connection signal="area_entered" from="." to="." method="OnSweeperCollision"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="OnVisibleOnScreenNotifier2DScreenExited"]
+[connection signal="area_entered" from="PickUpArea" to="." method="OnAreaEntered"]

@@ -50,6 +50,8 @@ public partial class Hud : Control
 	private void DayEnd()
 	{
 		_rushHourLabel.Visible = false;
+		SwitchSidewalkSweeperButtons(false);
+		SwitchStreetSweeperButtons(false);
 	}
 	//==============================================
 
