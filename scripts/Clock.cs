@@ -12,16 +12,18 @@ public partial class Clock : Control
 	private CustomSignals _customSignals;
 	private bool _rushHourStarted = false;
 	private bool _dayEnded = false;
+	private bool _paused = false;
 
 	public override void _Ready()
 	{
 		_customSignals = GetNode<CustomSignals>("/root/CustomSignals");
 		_customSignals.Connect("DayStart", new Callable(this, "DayStart"));
+		_customSignals.Connect("TriggerClockPause", new Callable(this, "PauseTime"));
 	}
 
     public override void _Process(double delta)
     {
-        if(dateTime is DateTime dt && !_dayEnded)
+        if(dateTime is DateTime dt && !_dayEnded && !_paused)
 		{	
 			dt.IncreaseBySec((float)delta * ticksPerSecond);
 			UpdateClock();
@@ -78,5 +80,10 @@ public partial class Clock : Control
 		}
 		var ClockArrow = GetNode<TextureRect>("ClockArrow");
 		ClockArrow.RotationDegrees = -69.0f;
+	}
+
+	public void PauseTime()
+	{
+		_paused = !_paused;
 	}
 }

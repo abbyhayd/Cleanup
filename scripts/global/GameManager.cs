@@ -21,11 +21,15 @@ public partial class GameManager : Node
         base._Ready();
 		_customSignals = GetNode<CustomSignals>("/root/CustomSignals");
 		_customSignals.Connect("DayStart", new Callable(this, nameof(ResetDay)));
+		_customSignals.Connect("DayEnd", new Callable(this, nameof(DayEnd)));
     }
+	public static void DayEnd()
+	{
+		TotalScore += Score;
+	}
 
 	public static void ResetDay()
 	{
-		TotalScore += Score;
 		Score = 0;
 		StreetSweeperCost = 10;
 		SidewalkSweeperCost = 10;

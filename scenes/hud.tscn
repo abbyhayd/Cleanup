@@ -7,16 +7,17 @@
 [ext_resource type="Texture2D" uid="uid://dx7her3rjp70c" path="res://assets/car/street_sweeper_transparent.png" id="4_uo2fv"]
 [ext_resource type="Texture2D" uid="uid://bmg7dd8x0v0mc" path="res://assets/trash assets/box_sprites.png" id="5_0i1j5"]
 [ext_resource type="Texture2D" uid="uid://dbpbnlhxm582d" path="res://assets/car/street_sweeper.png" id="5_047uy"]
+[ext_resource type="PackedScene" uid="uid://bb3gmnteywn4t" path="res://scenes/end_of_day_panel.tscn" id="5_mphia"]
 [ext_resource type="Texture2D" uid="uid://dm7erkuqwd7pe" path="res://assets/person/sidewalk_sweeper_transparent.png" id="6_5pdws"]
 [ext_resource type="Texture2D" uid="uid://cmcki1h7nogvp" path="res://assets/person/sidewalk_sweeper.png" id="7_hd3ao"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2cl6o"]
 atlas = ExtResource("5_0i1j5")
-region = Rect2(0, 16, 64, 16)
+region = Rect2(0, 64, 64, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ly126"]
 atlas = ExtResource("5_0i1j5")
-region = Rect2(66, 16, 64, 16)
+region = Rect2(66, 64, 64, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y3ix0"]
 atlas = ExtResource("5_0i1j5")
@@ -94,51 +95,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_lock_ = true
 
-[node name="EndOfDayPanel" type="Panel" parent="." unique_id=2091665591]
+[node name="EndOfDayPanel" parent="." unique_id=1628180159 instance=ExtResource("5_mphia")]
 visible = false
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -110.0
-offset_top = -110.0
-offset_right = 110.0
-offset_bottom = 110.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="EndOfDayPanel" unique_id=1636951723]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -41.0
-offset_top = -11.5
-offset_right = 41.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Day Ended"
-
-[node name="NextDayButton" type="Button" parent="EndOfDayPanel" unique_id=1955259735]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -49.0
-offset_top = -57.17
-offset_right = 49.0
-offset_bottom = -26.169998
-grow_horizontal = 2
-grow_vertical = 0
-text = "Next Day"
 
 [node name="ToolButtons" type="HBoxContainer" parent="." unique_id=991834292]
 layout_mode = 0
@@ -273,7 +232,6 @@ theme_override_font_sizes/font_size = 57
 text = "10
 "
 
-[connection signal="pressed" from="EndOfDayPanel/NextDayButton" to="." method="OnNextDayButtonPressed"]
 [connection signal="pressed" from="ToolButtons/StreetSweeperButton" to="." method="OnStreetSweeperButton"]
 [connection signal="pressed" from="ToolButtons/SidewalkSweeperButton" to="." method="OnSidewalkSweeperButton"]
 [connection signal="pressed" from="Tools/TopStreetSweeperButton" to="." method="OnTopStreetSweeperButton"]

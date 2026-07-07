@@ -9,7 +9,6 @@ public partial class Hud : Control
 	private Label _scoreLabel;
 	private Label _streetCleanerCostLabel;
 	private Label _sidewalkCleanerCostLabel;
-	private Panel _endOfDayPanel;
 
 	private TextureButton _topStreetSweeperButton;
 	private TextureButton _bottomStreetSweeperButton;
@@ -22,13 +21,11 @@ public partial class Hud : Control
 		_customSignals = GetNode<CustomSignals>("/root/CustomSignals");
 		_customSignals.Connect("RushHour", new Callable(this, nameof(RushHourStarted)));
 		_customSignals.Connect("DayEnd", new Callable(this, nameof(DayEnd)));
-		_customSignals.Connect("DayStart",new Callable(this, nameof(DayStart)));
 
 		_rushHourLabel = GetNode<Label>("RushHourLabel");
 		_scoreLabel = GetNode<Label>("ScoreLabel");
 		_streetCleanerCostLabel = GetNode<Label>("StreetCleanerCost");
 		_sidewalkCleanerCostLabel = GetNode<Label>("SidewalkCleanerCost");
-		_endOfDayPanel = GetNode<Panel>("EndOfDayPanel");
 
 		_topStreetSweeperButton = GetNode<TextureButton>("Tools/TopStreetSweeperButton");
 		_bottomStreetSweeperButton = GetNode<TextureButton>("Tools/BottomStreetSweeperButton");
@@ -49,16 +46,7 @@ public partial class Hud : Control
 
 	private void DayEnd()
 	{
-		_endOfDayPanel.Visible = true;
 		_rushHourLabel.Visible = false;
-	}
-	private void DayStart()
-	{
-		_endOfDayPanel.Visible = false;
-	}
-	public void OnNextDayButtonPressed()
-	{
-		_customSignals.EmitSignal("DayStart");
 	}
 	//==============================================
 
@@ -106,13 +94,13 @@ public partial class Hud : Control
 	}
 	public void OnTopSidewalkSweeperButton()
 	{
-		GameManager.SidewalkSweeperCost += 3;
+		GameManager.SidewalkSweeperCost += 2;
 		_customSignals.EmitSignal("SidewalkSweeperSpawned", new Vector2(-72, 128));
 		SwitchSidewalkSweeperButtons(false); 
 	}
 	public void OnBottomSidewalkSweeperButton()
 	{
-		GameManager.SidewalkSweeperCost += 3;
+		GameManager.SidewalkSweeperCost += 2;
 		_customSignals.EmitSignal("SidewalkSweeperSpawned", new Vector2(1229, 434));
 		SwitchSidewalkSweeperButtons(false); 
 	}

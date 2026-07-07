@@ -6,6 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://bc7in1ucwhjkc" path="res://assets/person/human2.png" id="3_yhvuw"]
 [ext_resource type="Texture2D" uid="uid://dtg68d0rc6cis" path="res://assets/person/human3.png" id="4_06ebq"]
 [ext_resource type="Texture2D" uid="uid://c3044j012bv4b" path="res://assets/person/human4.png" id="5_gqr4j"]
+[ext_resource type="AudioStream" uid="uid://osoukauad3kg" path="res://assets/audio/footsteps/Steps_floor-001.ogg" id="7_yhvuw"]
+[ext_resource type="AudioStream" uid="uid://bl1swt762b8b4" path="res://assets/audio/footsteps/Steps_floor-002.ogg" id="8_06ebq"]
+[ext_resource type="AudioStream" uid="uid://cl5mi4duag4ys" path="res://assets/audio/footsteps/Steps_floor-003.ogg" id="9_gqr4j"]
+[ext_resource type="AudioStream" uid="uid://d1bpuq7rbdrco" path="res://assets/audio/footsteps/Steps_floor-004.ogg" id="10_l302h"]
+[ext_resource type="AudioStream" uid="uid://b423a0qrgptqq" path="res://assets/audio/footsteps/Steps_floor-005.ogg" id="11_kiup0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_06ebq"]
 atlas = ExtResource("2_526uv")
@@ -257,6 +262,14 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2cl6o"]
 size = Vector2(47, 79)
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ly126"]
+streams_count = 5
+stream_0/stream = ExtResource("7_yhvuw")
+stream_1/stream = ExtResource("8_06ebq")
+stream_2/stream = ExtResource("9_gqr4j")
+stream_3/stream = ExtResource("10_l302h")
+stream_4/stream = ExtResource("11_kiup0")
+
 [node name="Person" type="Area2D" unique_id=1969147701]
 y_sort_enabled = true
 script = ExtResource("1_8qhow")
@@ -276,6 +289,14 @@ animation = &"human1_walk"
 position = Vector2(-3.5, -29.5)
 shape = SubResource("RectangleShape2D_2cl6o")
 debug_color = Color(0.3910513, 0.47266722, 1, 0.41960785)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1069639025]
+stream = SubResource("AudioStreamRandomizer_ly126")
+autoplay = true
+
+[node name="FootstepTimer" type="Timer" parent="." unique_id=1119278364]
+wait_time = 0.55
+one_shot = true
 
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="OnVisibleOnScreenNotifier2DScreenEntered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="OnVisibleOnScreenNotifier2DScreenExited"]

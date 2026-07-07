@@ -10,6 +10,8 @@
 [ext_resource type="FontFile" uid="uid://crnhyew0akrji" path="res://assets/hud/BoldPixels.ttf" id="8_tipki"]
 [ext_resource type="LabelSettings" uid="uid://dmmsjr0maw375" path="res://assets/hud/startmenu_label.tres" id="9_85g3d"]
 [ext_resource type="Texture2D" uid="uid://bmg7dd8x0v0mc" path="res://assets/trash assets/box_sprites.png" id="9_choun"]
+[ext_resource type="Texture2D" uid="uid://dyrl6ciqt4g84" path="res://assets/Sprite sheets/Sprite sheet for Basic Pack.png" id="11_ya4ey"]
+[ext_resource type="AudioStream" uid="uid://b3xbo45tvivk7" path="res://assets/audio/Track 3 (Supermart).wav" id="12_eb6dy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2cl6o"]
 size = Vector2(915, 377)
@@ -42,6 +44,10 @@ region = Rect2(0, 16, 64, 16)
 atlas = ExtResource("9_choun")
 region = Rect2(66, 16, 64, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_pykpw"]
+atlas = ExtResource("9_choun")
+region = Rect2(0, 48, 64, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_ia4vg"]
 atlas = ExtResource("9_choun")
 region = Rect2(0, 0, 64, 16)
@@ -49,6 +55,18 @@ region = Rect2(0, 0, 64, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_eltui"]
 atlas = ExtResource("9_choun")
 region = Rect2(66, 0, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_33bp4"]
+atlas = ExtResource("9_choun")
+region = Rect2(0, 48, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cm1wr"]
+atlas = ExtResource("11_ya4ey")
+region = Rect2(645, 68, 22, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0td8q"]
+atlas = ExtResource("11_ya4ey")
+region = Rect2(677, 68, 22, 24)
 
 [node name="Main" type="Node2D" unique_id=1394223643]
 script = ExtResource("1_0wfyh")
@@ -203,14 +221,14 @@ grow_vertical = 2
 text = "START"
 label_settings = ExtResource("9_85g3d")
 
-[node name="SettingButton" type="TextureButton" parent="StartMenu/VBoxContainer" unique_id=306268403]
+[node name="StartSettingsButton" type="TextureButton" parent="StartMenu/VBoxContainer" unique_id=306268403]
 custom_minimum_size = Vector2(384, 96)
 layout_mode = 2
 texture_normal = SubResource("AtlasTexture_2cl6o")
 texture_hover = SubResource("AtlasTexture_ya4ey")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="StartMenu/VBoxContainer/SettingButton" unique_id=331122266]
+[node name="Label" type="Label" parent="StartMenu/VBoxContainer/StartSettingsButton" unique_id=331122266]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -260,15 +278,32 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="BackButton" type="TextureButton" parent="SettingsMenu" unique_id=414990649]
+[node name="SettingsPanel" type="TextureRect" parent="SettingsMenu" unique_id=1247086837]
+custom_minimum_size = Vector2(700, 250)
 layout_mode = 0
-offset_left = 1648.5
-offset_top = -596.0
-offset_right = 1808.5
-offset_bottom = -540.0
+offset_left = 1377.5
+offset_top = -923.0
+offset_right = 2077.5
+offset_bottom = -673.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_pykpw")
+metadata/_edit_lock_ = true
+
+[node name="BackButton" type="TextureButton" parent="SettingsMenu" unique_id=414990649]
+custom_minimum_size = Vector2(160, 56)
+layout_mode = 0
+offset_left = 1647.5
+offset_top = -639.0
+offset_right = 1807.5
+offset_bottom = -583.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+offset_transform_enabled = true
 texture_normal = SubResource("AtlasTexture_ia4vg")
 texture_hover = SubResource("AtlasTexture_eltui")
 stretch_mode = 0
+metadata/_edit_lock_ = true
 
 [node name="Label" type="Label" parent="SettingsMenu/BackButton" unique_id=1171169999]
 layout_mode = 1
@@ -289,14 +324,18 @@ text = "BACK"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="SettingsMenu" unique_id=1408574210]
+[node name="SettingsLabel" type="Label" parent="SettingsMenu" unique_id=1408574210]
 layout_mode = 0
-offset_left = 1666.0
-offset_top = -808.0
-offset_right = 1727.0
-offset_bottom = -759.0
-text = "settings
-"
+offset_left = 1583.5
+offset_top = -901.0
+offset_right = 1871.5
+offset_bottom = -845.0
+size_flags_horizontal = 4
+offset_transform_enabled = true
+theme_override_fonts/font = ExtResource("8_tipki")
+theme_override_font_sizes/font_size = 64
+text = "SETTINGS"
+metadata/_edit_lock_ = true
 
 [node name="CreditMenu" type="Control" parent="." unique_id=852153534]
 layout_mode = 3
@@ -304,12 +343,38 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="CreditsPanel" type="TextureRect" parent="CreditMenu" unique_id=2050753448]
+custom_minimum_size = Vector2(700, 250)
+layout_mode = 0
+offset_left = -925.0
+offset_top = -923.0
+offset_right = -225.0
+offset_bottom = -673.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_33bp4")
+metadata/_edit_lock_ = true
+
+[node name="CreditsLabel" type="Label" parent="CreditMenu" unique_id=1762039361]
+custom_minimum_size = Vector2(0, -68.655)
+layout_mode = 0
+offset_left = -1148.0
+offset_top = -901.0
+offset_right = -0.5
+offset_bottom = -845.0
+theme_override_fonts/font = ExtResource("8_tipki")
+theme_override_font_sizes/font_size = 64
+text = "CREDITS"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
 [node name="BackButton" type="TextureButton" parent="CreditMenu" unique_id=469183379]
 layout_mode = 0
 offset_left = -655.0
-offset_top = -596.0
+offset_top = -639.0
 offset_right = -495.0
-offset_bottom = -540.0
+offset_bottom = -583.0
 pivot_offset = Vector2(80, 0)
 texture_normal = SubResource("AtlasTexture_ia4vg")
 texture_hover = SubResource("AtlasTexture_eltui")
@@ -335,13 +400,39 @@ text = "BACK"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="CreditMenu" unique_id=2095740831]
+[node name="VScrollBar" type="ScrollContainer" parent="CreditMenu" unique_id=337317901]
 layout_mode = 0
-offset_left = -636.0
-offset_top = -828.0
-offset_right = -596.0
-offset_bottom = -805.0
-text = "credits"
+offset_left = -880.0
+offset_top = -842.0
+offset_right = -270.0
+offset_bottom = -702.0
+
+[node name="Credits" type="Label" parent="CreditMenu/VScrollBar" unique_id=1144719227]
+layout_mode = 2
+size_flags_vertical = 1
+text = "UI: https://cupnooble.itch.io/sprout-lands-ui-pack
+Template for people: https://kingkelp.itch.io/walking-template
+Cars: https://kenney.nl/assets/roguelike-modern-city
+Alarm Clock Font: https://www.dafont.com/alarm-clock.font
+Sky gradient: https://colorkit.co/gradient/62cff4-2c67f2/
+Some trash assets : https://btl-games.itch.io/trash-and-junk-asset-pack
+Pixel font: https://yukipixels.itch.io/boldpixels
+Clouds: https://srblackrave.itch.io/2d-pixel-art-semi-realistic-clouds"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameSettingsButton" type="TextureButton" parent="." unique_id=1942349547]
+offset_left = 540.0
+offset_top = 564.0
+offset_right = 610.0
+offset_bottom = 634.0
+texture_normal = SubResource("AtlasTexture_cm1wr")
+texture_hover = SubResource("AtlasTexture_0td8q")
+stretch_mode = 0
+
+[node name="BGMusic" type="AudioStreamPlayer" parent="." unique_id=204693176]
+stream = ExtResource("12_eb6dy")
+autoplay = true
 
 [connection signal="timeout" from="Timers/PersonSpawnTimer" to="." method="OnPersonSpawnTimerTimeout"]
 [connection signal="timeout" from="Timers/CarLeftSpawnTimer" to="." method="OnCarLeftSpawnTimerTimeout"]
@@ -349,7 +440,8 @@ text = "credits"
 [connection signal="area_entered" from="TrashSpawnArea" to="." method="OnTrashSpawnAreaAreaEntered"]
 [connection signal="area_exited" from="TrashSpawnArea" to="." method="OnTrashSpawnAreaAreaExited"]
 [connection signal="pressed" from="StartMenu/VBoxContainer/StartButton" to="." method="OnStartButtonPressed"]
-[connection signal="pressed" from="StartMenu/VBoxContainer/SettingButton" to="." method="OnSettingsButtonPressed"]
+[connection signal="pressed" from="StartMenu/VBoxContainer/StartSettingsButton" to="." method="OnStartSettingsButtonPressed"]
 [connection signal="pressed" from="StartMenu/VBoxContainer/CreditButton" to="." method="OnCreditsButtonPressed"]
 [connection signal="pressed" from="SettingsMenu/BackButton" to="." method="OnBackButtonPressed"]
 [connection signal="pressed" from="CreditMenu/BackButton" to="." method="OnBackButtonPressed"]
+[connection signal="pressed" from="GameSettingsButton" to="." method="OnGameSettingsButtonPressed"]

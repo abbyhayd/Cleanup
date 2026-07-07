@@ -1,0 +1,129 @@
+[gd_scene format=3 uid="uid://bb3gmnteywn4t"]
+
+[ext_resource type="Script" uid="uid://djyxtqfwtpd2p" path="res://scripts/EndOfDayPanel.cs" id="1_fob4i"]
+[ext_resource type="Texture2D" uid="uid://bmg7dd8x0v0mc" path="res://assets/trash assets/box_sprites.png" id="2_t7a0q"]
+[ext_resource type="FontFile" uid="uid://crnhyew0akrji" path="res://assets/hud/BoldPixels.ttf" id="3_6pxsm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cl6o"]
+atlas = ExtResource("2_t7a0q")
+region = Rect2(0, 48, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ly126"]
+atlas = ExtResource("2_t7a0q")
+region = Rect2(0, 0, 64, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y3ix0"]
+atlas = ExtResource("2_t7a0q")
+region = Rect2(66, 0, 64, 16)
+
+[node name="EndOfDayPanel" type="Control" unique_id=1831917672]
+z_index = 20
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = -110.0
+offset_right = 110.0
+offset_bottom = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_fob4i")
+
+[node name="PanelTexture" type="TextureRect" parent="." unique_id=337182856]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -170.0
+offset_top = -191.0
+offset_right = 170.0
+offset_bottom = 89.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_2cl6o")
+
+[node name="DayEndedLabel" type="Label" parent="PanelTexture" unique_id=1505489467]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.5
+offset_top = -109.0
+offset_right = 119.5
+offset_bottom = -58.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_6pxsm")
+theme_override_font_sizes/font_size = 58
+text = "Day Ended"
+
+[node name="DayOfScoreLabel" type="Label" parent="PanelTexture" unique_id=1518782671]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 108.0
+offset_right = 307.0
+offset_bottom = 165.0
+theme_override_fonts/font = ExtResource("3_6pxsm")
+theme_override_font_sizes/font_size = 30
+text = "Trash collected today:
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TotalScoreLabel" type="Label" parent="PanelTexture" unique_id=508364801]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 192.0
+offset_right = 300.0
+offset_bottom = 219.0
+theme_override_fonts/font = ExtResource("3_6pxsm")
+theme_override_font_sizes/font_size = 30
+text = "Total score: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextDayButton" type="TextureButton" parent="." unique_id=259779427]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -119.0
+offset_top = 8.0
+offset_right = 119.0
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = SubResource("AtlasTexture_ly126")
+texture_hover = SubResource("AtlasTexture_y3ix0")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="NextDayButton" unique_id=236385954]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -27.0
+offset_right = 100.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_6pxsm")
+theme_override_font_sizes/font_size = 56
+text = "Next day"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="NextDayButton" to="." method="OnNextDayButtonPressed"]

@@ -18,6 +18,10 @@ public partial class Main : Node2D
 	private Tween _cameraTween;
 	private Camera2D _camera;
 
+	private Control _startMenu;
+	private Control _settingsMenu;
+	private bool _ifInSettingsFromGame;
+
 
 	public override void _Ready()
 	{
@@ -32,6 +36,8 @@ public partial class Main : Node2D
 		_carRightSpawnTimer.WaitTime = GameManager.DEFAULT_CAR_SPAWN_TIME;
 
 		_trashContainer = GetNode<Node2D>("TrashContainer");
+		_startMenu = GetNode<Control>("StartMenu");
+		_settingsMenu = GetNode<Control>("SettingsMenu");
 
 		_customSignals = GetNode<CustomSignals>("/root/CustomSignals");
 		_customSignals.Connect("RushHour", new Callable(this, nameof(RushHourStarted)));
@@ -60,7 +66,6 @@ public partial class Main : Node2D
 		var SpawnedEntities = GetNode<Node2D>("SpawnedEntities");
 		SpawnedEntities.AddChild(person);
 	}
-
 	private void OnCarLeftSpawnTimerTimeout()
 	{
 		Car car = CarScene.Instantiate<Car>();
@@ -79,7 +84,6 @@ public partial class Main : Node2D
 		var SpawnedEntities = GetNode<Node2D>("SpawnedEntities");
 		SpawnedEntities.AddChild(car);
 	}
-
 	private void SpawnStreetSweeper(Vector2 position)
 	{
 		StreetSweeper sweeper = StreetSweeperScene.Instantiate<StreetSweeper>();
@@ -149,10 +153,12 @@ public partial class Main : Node2D
 		_cameraTween.TweenProperty(_camera, "global_position", new Vector2(577, 325), 1.5f);
 		await ToSignal(_cameraTween, Tween.SignalName.Finished);
 		_customSignals.EmitSignal("DayStart");
+
+		_startMenu.Visible = false;
+		_settingsMenu.Position = new Vector2(-1151, 0);
 	}
-	public async void OnSettingsButtonPressed()
+	public async void OnStartSettingsButtonPressed()
 	{
-		//(1729,-772) - (2305, -772)
 		_cameraTween = CreateTween();
 		_cameraTween.SetTrans(Tween.TransitionType.Sine);
         _cameraTween.SetEase(Tween.EaseType.Out);
@@ -160,9 +166,19 @@ public partial class Main : Node2D
 		_cameraTween.TweenProperty(_camera, "global_position", new Vector2(1729,-772), 1.5f);
 		await ToSignal(_cameraTween, Tween.SignalName.Finished);
 	}
+	public async void OnGameSettingsButtonPressed()
+	{
+		_customSignals.EmitSignal("TriggerClockPause");
+		_ifInSettingsFromGame = true;
+		_cameraTween = CreateTween();
+		_cameraTween.SetTrans(Tween.TransitionType.Sine);
+        _cameraTween.SetEase(Tween.EaseType.Out);
+
+		_cameraTween.TweenProperty(_camera, "global_position", new Vector2(577, -772), 1.5f);
+		await ToSignal(_cameraTween, Tween.SignalName.Finished);
+	}
 	public async void OnCreditsButtonPressed()
 	{ 
-		//(-577, -772) - (-1152, -772 )
 		_cameraTween = CreateTween();
 		_cameraTween.SetTrans(Tween.TransitionType.Sine);
         _cameraTween.SetEase(Tween.EaseType.Out);
@@ -176,10 +192,18 @@ public partial class Main : Node2D
 		_cameraTween.SetTrans(Tween.TransitionType.Sine);
         _cameraTween.SetEase(Tween.EaseType.Out);
 
-		_cameraTween.TweenProperty(_camera, "global_position", new Vector2(577, -772), 1.5f);
-		await ToSignal(_cameraTween, Tween.SignalName.Finished);
+		if (_ifInSettingsFromGame)
+		{
+			_cameraTween.TweenProperty(_camera, "global_position", new Vector2(577, 325), 1.5f);
+			await ToSignal(_cameraTween, Tween.SignalName.Finished);
+			_customSignals.EmitSignal("TriggerClockPause");
+		}
+		else
+		{
+			_cameraTween.TweenProperty(_camera, "global_position", new Vector2(577, -772), 1.5f);
+			await ToSignal(_cameraTween, Tween.SignalName.Finished);
+		}
 	}
-
 	private Node GetRandomChild(Node parent)
 	{
 		int childCount = parent.GetChildCount();
