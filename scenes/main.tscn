@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bmg7dd8x0v0mc" path="res://assets/trash assets/box_sprites.png" id="9_choun"]
 [ext_resource type="Texture2D" uid="uid://dyrl6ciqt4g84" path="res://assets/Sprite sheets/Sprite sheet for Basic Pack.png" id="11_ya4ey"]
 [ext_resource type="AudioStream" uid="uid://b3xbo45tvivk7" path="res://assets/audio/Track 3 (Supermart).wav" id="12_eb6dy"]
+[ext_resource type="AudioStream" uid="uid://s2codj678cf6" path="res://assets/audio/blip.wav" id="13_trceg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2cl6o"]
 size = Vector2(915, 377)
@@ -120,6 +121,7 @@ position = Vector2(1275, 327)
 wait_time = 1.5
 
 [node name="CarRightSpawnTimer" type="Timer" parent="Timers" unique_id=433373738]
+wait_time = 1.5
 
 [node name="SpawnedEntities" type="Node2D" parent="." unique_id=904055766]
 y_sort_enabled = true
@@ -417,7 +419,11 @@ Alarm Clock Font: https://www.dafont.com/alarm-clock.font
 Sky gradient: https://colorkit.co/gradient/62cff4-2c67f2/
 Some trash assets : https://btl-games.itch.io/trash-and-junk-asset-pack
 Pixel font: https://yukipixels.itch.io/boldpixels
-Clouds: https://srblackrave.itch.io/2d-pixel-art-semi-realistic-clouds"
+Clouds: https://srblackrave.itch.io/2d-pixel-art-semi-realistic-clouds
+Footsteps: https://dryoma.itch.io/footsteps-sounds
+Music: https://zakiro101.itch.io/free-casual-game-music-pack-vol-1
+Trash pick up: https://pixabay.com/sound-effects/film-special-effects-trash-rustling-77734/
+Other audio: https://sfbgames.itch.io/chiptone"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -433,6 +439,12 @@ stretch_mode = 0
 [node name="BGMusic" type="AudioStreamPlayer" parent="." unique_id=204693176]
 stream = ExtResource("12_eb6dy")
 autoplay = true
+bus = &"Music"
+
+[node name="ButtonSelectSound" type="AudioStreamPlayer" parent="." unique_id=587102419]
+stream = ExtResource("13_trceg")
+volume_db = 5.0
+bus = &"SFX"
 
 [connection signal="timeout" from="Timers/PersonSpawnTimer" to="." method="OnPersonSpawnTimerTimeout"]
 [connection signal="timeout" from="Timers/CarLeftSpawnTimer" to="." method="OnCarLeftSpawnTimerTimeout"]

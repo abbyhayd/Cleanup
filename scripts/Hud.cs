@@ -16,6 +16,8 @@ public partial class Hud : Control
 	private TextureButton _topSidewalkSweeperButton;
 	private TextureButton _bottomSidewalkSweeperButton;
 
+	private AudioStreamPlayer _audio;
+
 	public override void _Ready()
 	{
 		_customSignals = GetNode<CustomSignals>("/root/CustomSignals");
@@ -26,6 +28,7 @@ public partial class Hud : Control
 		_scoreLabel = GetNode<Label>("ScoreLabel");
 		_streetCleanerCostLabel = GetNode<Label>("StreetCleanerCost");
 		_sidewalkCleanerCostLabel = GetNode<Label>("SidewalkCleanerCost");
+		_audio = GetNode<AudioStreamPlayer>("ButtonSelectSound");
 
 		_topStreetSweeperButton = GetNode<TextureButton>("Tools/TopStreetSweeperButton");
 		_bottomStreetSweeperButton = GetNode<TextureButton>("Tools/BottomStreetSweeperButton");
@@ -59,6 +62,8 @@ public partial class Hud : Control
 	}
 	public void OnStreetSweeperButton()
 	{
+		_audio.Play();
+
 		if(GameManager.Score >= GameManager.StreetSweeperCost){
 			SwitchStreetSweeperButtons(true);
 			GameManager.Score -= GameManager.StreetSweeperCost;
@@ -66,12 +71,16 @@ public partial class Hud : Control
 	}
 	public void OnTopStreetSweeperButton()
 	{	
+		_audio.Play();
+
 		GameManager.StreetSweeperCost += 3;
 		_customSignals.EmitSignal("StreetSweeperSpawned", new Vector2(1315, 234));
 		SwitchStreetSweeperButtons(false);
 	}
 	public void OnBottomStreetSweeperButton()
 	{
+		_audio.Play();
+
 		GameManager.StreetSweeperCost += 3;
 		_customSignals.EmitSignal("StreetSweeperSpawned", new Vector2(-163, 338));
 		SwitchStreetSweeperButtons(false);
@@ -87,6 +96,8 @@ public partial class Hud : Control
 	}
 	public void OnSidewalkSweeperButton()
 	{
+		_audio.Play();
+
 		if(GameManager.Score >= GameManager.SidewalkSweeperCost){
 			SwitchSidewalkSweeperButtons(true);
 			GameManager.Score -= GameManager.SidewalkSweeperCost;
@@ -94,12 +105,16 @@ public partial class Hud : Control
 	}
 	public void OnTopSidewalkSweeperButton()
 	{
+		_audio.Play();
+
 		GameManager.SidewalkSweeperCost += 2;
 		_customSignals.EmitSignal("SidewalkSweeperSpawned", new Vector2(-72, 128));
 		SwitchSidewalkSweeperButtons(false); 
 	}
 	public void OnBottomSidewalkSweeperButton()
 	{
+		_audio.Play();
+
 		GameManager.SidewalkSweeperCost += 2;
 		_customSignals.EmitSignal("SidewalkSweeperSpawned", new Vector2(1229, 434));
 		SwitchSidewalkSweeperButtons(false); 

@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bb3gmnteywn4t" path="res://scenes/end_of_day_panel.tscn" id="5_mphia"]
 [ext_resource type="Texture2D" uid="uid://dm7erkuqwd7pe" path="res://assets/person/sidewalk_sweeper_transparent.png" id="6_5pdws"]
 [ext_resource type="Texture2D" uid="uid://cmcki1h7nogvp" path="res://assets/person/sidewalk_sweeper.png" id="7_hd3ao"]
+[ext_resource type="AudioStream" uid="uid://s2codj678cf6" path="res://assets/audio/blip.wav" id="11_0m4u7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2cl6o"]
 atlas = ExtResource("5_0i1j5")
@@ -231,6 +232,11 @@ theme_override_fonts/font = ExtResource("3_hd3ao")
 theme_override_font_sizes/font_size = 57
 text = "10
 "
+
+[node name="ButtonSelectSound" type="AudioStreamPlayer" parent="." unique_id=150052474]
+stream = ExtResource("11_0m4u7")
+volume_db = 5.0
+bus = &"SFX"
 
 [connection signal="pressed" from="ToolButtons/StreetSweeperButton" to="." method="OnStreetSweeperButton"]
 [connection signal="pressed" from="ToolButtons/SidewalkSweeperButton" to="." method="OnSidewalkSweeperButton"]

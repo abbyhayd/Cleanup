@@ -22,6 +22,11 @@ public partial class Main : Node2D
 	private Control _settingsMenu;
 	private bool _ifInSettingsFromGame;
 
+	private AudioStreamPlayer _audio;
+	private int SFX_BUS_ID;
+	private int MUSIC_BUS_ID;
+
+
 
 	public override void _Ready()
 	{
@@ -38,6 +43,9 @@ public partial class Main : Node2D
 		_trashContainer = GetNode<Node2D>("TrashContainer");
 		_startMenu = GetNode<Control>("StartMenu");
 		_settingsMenu = GetNode<Control>("SettingsMenu");
+		_audio = GetNode<AudioStreamPlayer>("ButtonSelectSound");
+		SFX_BUS_ID = AudioServer.GetBusIndex("SFX");
+		MUSIC_BUS_ID = AudioServer.GetBusIndex("Music");
 
 		_customSignals = GetNode<CustomSignals>("/root/CustomSignals");
 		_customSignals.Connect("RushHour", new Callable(this, nameof(RushHourStarted)));
@@ -146,6 +154,7 @@ public partial class Main : Node2D
 	}
 	public async void OnStartButtonPressed()
 	{
+		_audio.Play();
 		_cameraTween = CreateTween();
 		_cameraTween.SetTrans(Tween.TransitionType.Sine);
         _cameraTween.SetEase(Tween.EaseType.Out);
@@ -159,6 +168,8 @@ public partial class Main : Node2D
 	}
 	public async void OnStartSettingsButtonPressed()
 	{
+		_audio.Play();
+
 		_cameraTween = CreateTween();
 		_cameraTween.SetTrans(Tween.TransitionType.Sine);
         _cameraTween.SetEase(Tween.EaseType.Out);
@@ -168,6 +179,8 @@ public partial class Main : Node2D
 	}
 	public async void OnGameSettingsButtonPressed()
 	{
+		_audio.Play();
+
 		_customSignals.EmitSignal("TriggerClockPause");
 		_ifInSettingsFromGame = true;
 		_cameraTween = CreateTween();
@@ -179,6 +192,8 @@ public partial class Main : Node2D
 	}
 	public async void OnCreditsButtonPressed()
 	{ 
+		_audio.Play();
+
 		_cameraTween = CreateTween();
 		_cameraTween.SetTrans(Tween.TransitionType.Sine);
         _cameraTween.SetEase(Tween.EaseType.Out);
@@ -188,6 +203,8 @@ public partial class Main : Node2D
 	}
 	public async void OnBackButtonPressed()
 	{
+		_audio.Play();
+
 		_cameraTween = CreateTween();
 		_cameraTween.SetTrans(Tween.TransitionType.Sine);
         _cameraTween.SetEase(Tween.EaseType.Out);
@@ -216,4 +233,15 @@ public partial class Main : Node2D
 		return parent.GetChild(randomIndex);
 
 	}
+
+	//====================AUDIO SLIDERS=============================
+	public void OnMusicSliderValueChanged(float value)
+	{
+		//AudioServer.SetBusVolumeDb(MUSIC_BUS_ID)
+	}
+	public void OnSFXSliderValueChanged(float value)
+	{
+		
+	}
+	//====================================================================
 }

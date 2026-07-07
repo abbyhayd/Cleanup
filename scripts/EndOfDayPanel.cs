@@ -6,6 +6,8 @@ public partial class EndOfDayPanel : Control
 	private CustomSignals _customSignals;
 	private Label _dayOfScoreLabel;
 	private Label _totalScoreLabel;
+	private AudioStreamPlayer _audio;
+
 
 	public override void _Ready()
 	{
@@ -15,13 +17,15 @@ public partial class EndOfDayPanel : Control
 
 		_dayOfScoreLabel = GetNode<Label>("PanelTexture/DayOfScoreLabel");
 		_totalScoreLabel = GetNode<Label>("PanelTexture/TotalScoreLabel");
+		_audio = GetNode<AudioStreamPlayer>("ButtonSelectSound");
+
 	}
     public override void _Process(double delta)
     {
         base._Process(delta);
 		if (Visible)
 		{
-			_dayOfScoreLabel.Text = $"Trash collected today: \n{GameManager.Score}";
+			_dayOfScoreLabel.Text = $"Trash collected today: \n{GameManager.DayScore}";
 			_totalScoreLabel.Text = $"Total score: {GameManager.TotalScore}";
 		}
     }
@@ -37,6 +41,8 @@ public partial class EndOfDayPanel : Control
 
 	public void OnNextDayButtonPressed()
 	{
+		_audio.Play();
+
 		_customSignals.EmitSignal("DayStart");
 		
 	}

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://djyxtqfwtpd2p" path="res://scripts/EndOfDayPanel.cs" id="1_fob4i"]
 [ext_resource type="Texture2D" uid="uid://bmg7dd8x0v0mc" path="res://assets/trash assets/box_sprites.png" id="2_t7a0q"]
 [ext_resource type="FontFile" uid="uid://crnhyew0akrji" path="res://assets/hud/BoldPixels.ttf" id="3_6pxsm"]
+[ext_resource type="AudioStream" uid="uid://s2codj678cf6" path="res://assets/audio/blip.wav" id="4_t7a0q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2cl6o"]
 atlas = ExtResource("2_t7a0q")
@@ -125,5 +126,10 @@ theme_override_font_sizes/font_size = 56
 text = "Next day"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ButtonSelectSound" type="AudioStreamPlayer" parent="." unique_id=791337653]
+stream = ExtResource("4_t7a0q")
+volume_db = 5.0
+bus = &"SFX"
 
 [connection signal="pressed" from="NextDayButton" to="." method="OnNextDayButtonPressed"]
