@@ -235,7 +235,7 @@ text = "10
 
 [node name="ButtonSelectSound" type="AudioStreamPlayer" parent="." unique_id=150052474]
 stream = ExtResource("11_0m4u7")
-volume_db = 5.0
+volume_db = -10.0
 bus = &"SFX"
 
 [connection signal="pressed" from="ToolButtons/StreetSweeperButton" to="." method="OnStreetSweeperButton"]

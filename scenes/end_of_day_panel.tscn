@@ -129,7 +129,7 @@ vertical_alignment = 1
 
 [node name="ButtonSelectSound" type="AudioStreamPlayer" parent="." unique_id=791337653]
 stream = ExtResource("4_t7a0q")
-volume_db = 5.0
+volume_db = -10.0
 bus = &"SFX"
 
 [connection signal="pressed" from="NextDayButton" to="." method="OnNextDayButtonPressed"]

@@ -237,11 +237,13 @@ public partial class Main : Node2D
 	//====================AUDIO SLIDERS=============================
 	public void OnMusicSliderValueChanged(float value)
 	{
-		//AudioServer.SetBusVolumeDb(MUSIC_BUS_ID)
+		AudioServer.SetBusVolumeDb(MUSIC_BUS_ID, Mathf.LinearToDb(value));
+		AudioServer.SetBusMute(MUSIC_BUS_ID, value < 0.05);
 	}
 	public void OnSFXSliderValueChanged(float value)
 	{
-		
+		AudioServer.SetBusVolumeDb(SFX_BUS_ID, Mathf.LinearToDb(value));
+		AudioServer.SetBusMute(SFX_BUS_ID, value < 0.05 );
 	}
 	//====================================================================
 }

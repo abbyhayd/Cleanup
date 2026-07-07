@@ -339,6 +339,43 @@ theme_override_font_sizes/font_size = 64
 text = "SETTINGS"
 metadata/_edit_lock_ = true
 
+[node name="GridContainer" type="GridContainer" parent="SettingsMenu" unique_id=749983665]
+layout_mode = 0
+offset_left = 1514.0
+offset_top = -821.0
+offset_right = 1952.0
+offset_bottom = -737.0
+theme_override_constants/h_separation = 16
+columns = 2
+
+[node name="MusicLabel" type="Label" parent="SettingsMenu/GridContainer" unique_id=803400843]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_tipki")
+theme_override_font_sizes/font_size = 45
+text = "Music"
+
+[node name="MusicSlider" type="HSlider" parent="SettingsMenu/GridContainer" unique_id=1329968914]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="SFXLabel" type="Label" parent="SettingsMenu/GridContainer" unique_id=987181752]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_tipki")
+theme_override_font_sizes/font_size = 45
+text = "SFX"
+
+[node name="SFXSlider" type="HSlider" parent="SettingsMenu/GridContainer" unique_id=829718426]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+
 [node name="CreditMenu" type="Control" parent="." unique_id=852153534]
 layout_mode = 3
 anchors_preset = 0
@@ -438,12 +475,13 @@ stretch_mode = 0
 
 [node name="BGMusic" type="AudioStreamPlayer" parent="." unique_id=204693176]
 stream = ExtResource("12_eb6dy")
+volume_db = -30.0
 autoplay = true
 bus = &"Music"
 
 [node name="ButtonSelectSound" type="AudioStreamPlayer" parent="." unique_id=587102419]
 stream = ExtResource("13_trceg")
-volume_db = 5.0
+volume_db = -10.0
 bus = &"SFX"
 
 [connection signal="timeout" from="Timers/PersonSpawnTimer" to="." method="OnPersonSpawnTimerTimeout"]
@@ -455,5 +493,7 @@ bus = &"SFX"
 [connection signal="pressed" from="StartMenu/VBoxContainer/StartSettingsButton" to="." method="OnStartSettingsButtonPressed"]
 [connection signal="pressed" from="StartMenu/VBoxContainer/CreditButton" to="." method="OnCreditsButtonPressed"]
 [connection signal="pressed" from="SettingsMenu/BackButton" to="." method="OnBackButtonPressed"]
+[connection signal="value_changed" from="SettingsMenu/GridContainer/MusicSlider" to="." method="OnMusicSliderValueChanged"]
+[connection signal="value_changed" from="SettingsMenu/GridContainer/SFXSlider" to="." method="OnSFXSliderValueChanged"]
 [connection signal="pressed" from="CreditMenu/BackButton" to="." method="OnBackButtonPressed"]
 [connection signal="pressed" from="GameSettingsButton" to="." method="OnGameSettingsButtonPressed"]

@@ -292,6 +292,7 @@ debug_color = Color(0.3910513, 0.47266722, 1, 0.41960785)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1069639025]
 stream = SubResource("AudioStreamRandomizer_ly126")
+volume_db = -25.0
 autoplay = true
 bus = &"SFX"
 
