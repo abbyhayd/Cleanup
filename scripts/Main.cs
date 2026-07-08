@@ -60,24 +60,6 @@ public partial class Main : Node2D
 	}
 
 	//=====================SPAWN CONTROL========================
-	// private void OnPersonSpawnTimerTimeout()
-	// {
-	// 	Person person = PersonScene.Instantiate<Person>();
-	// 	Node2D spawnPoints = GetNode<Node2D>("PersonSpawnMarkers");
-	// 	Marker2D spawnPoint = GetRandomChild(spawnPoints) as Marker2D ?? throw new Exception("No spawn points found.");
-	// 	person.Position = spawnPoint.Position;
-	// 	if(spawnPoint.Name == "TopLeft" || spawnPoint.Name == "TopRight")
-	// 	{
-	// 		person.ZIndex = 1;
-	// 	}
-	// 	else
-	// 	{
-	// 		person.ZIndex = 4;
-	// 	}
-
-	// 	var SpawnedEntities = GetNode<Node2D>("SpawnedEntities");
-	// 	SpawnedEntities.AddChild(person);
-	// }
 	private void OnPersonTopSpawnTimerTimeout()
 	{
 		Person person = PersonScene.Instantiate<Person>();
@@ -198,9 +180,10 @@ public partial class Main : Node2D
 		_cameraTween.SetTrans(Tween.TransitionType.Sine);
         _cameraTween.SetEase(Tween.EaseType.Out);
 
-		_cameraTween.TweenProperty(_camera, "global_position", new Vector2(577, 325), 1.5f);
-		await ToSignal(_cameraTween, Tween.SignalName.Finished);
+		_cameraTween.TweenProperty(_camera, "global_position", new Vector2(577, 325), 1.3f);
 		_customSignals.EmitSignal("DayStart");
+
+		await ToSignal(_cameraTween, Tween.SignalName.Finished);
 
 		_startMenu.Visible = false;
 		_settingsMenu.Position = new Vector2(-1151, 0);
